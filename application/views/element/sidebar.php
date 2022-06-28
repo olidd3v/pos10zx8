@@ -106,14 +106,15 @@
       </ul>
       <?php } elseif ($_SESSION['role'] == 0) {?>
       <ul class="sidebar-menu">
-		  <li class="treeview <?php echo is_menu('transaksi');?>">
+      <li class="<?php echo is_menu('home','dashboard');?>"><a href="<?php echo site_url();?>"><i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a></li>
+		  <!-- <li class="treeview <?php echo is_menu('transaksi');?>">
           <a href="#"><i class="fa fa-cart-plus"></i> <span>Transaksi Pembelian</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu"> 
 			<li class="<?php echo is_menu('transaksi');?>"><a href="<?php echo site_url('transaksi');?>"><i class="fa fa-area-chart" aria-hidden="true"></i> <span>List Transaksi</span></a></li>
 			<li class="<?php echo is_menu('transaksi','create');?>"><a href="<?php echo site_url('transaksi/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Transaction</span></a></li>
 			<li class="<?php echo is_menu('transaksi','report');?>"><a href="<?php echo site_url('transaksi/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Transaction</span></a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="treeview <?php echo is_menu('penjualan');?>">
           <a href="#"><i class="fa fa-cart-plus"></i> <span>Transaksi Penjualan</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">

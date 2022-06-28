@@ -28,7 +28,7 @@
               <form action="<?php echo site_url('penjualan/report?search=true');?>" method="GET">
                 <input type="hidden" class="form-control" name="search" value="true"/>
                 <div class="box-body pad">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label for="id">Kode Penjualan</label>
                       <input type="text" class="form-control" name="id" value="<?php echo !empty($_GET['id']) ? $_GET['id'] : '';?>"/>
@@ -62,10 +62,16 @@
                       <a href="<?php echo site_url('penjualan/export_csv').get_uri();?>" class="form-control btn btn-default"><i class="fa fa-file-excel-o"></i> Export Excel</a>
                     </div>
                   </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="submit">&nbsp</label>
+                      <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div>
+                    </div>
+                  </div>
                 </div>
               </form>
               <table id="example1" class="table table-bordered table-striped">
-                <thead>
+                <thead style="text-align: left;">
                 <tr>
                   <th>Transaksi ID</th>
                   <th>Customer Name</th>
@@ -90,7 +96,7 @@
                   <?php } ?>
                 <?php } ?>
                 </tbody>
-                <tfoot>
+                <tfoot style="text-align: left;">
                 <tr>
                   <th colspan="2">Total</th>
                   <th id="total"></th>
@@ -113,6 +119,20 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <script>
+    function printData()
+    {
+      var divToPrint=document.getElementById("example1");
+      newWin= window.open("");
+      newWin.document.write(divToPrint.outerHTML);
+      newWin.print();
+      newWin.close();
+    }
+
+    $('button').on('click',function(){
+    printData();
+    })
+  </script>
   <script type="text/javascript">
        function setup(){
         var TotalValue = 0;

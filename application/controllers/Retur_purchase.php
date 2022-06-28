@@ -104,6 +104,16 @@ class Retur_purchase extends MY_Controller {
 		$this->load->view('retur_purchase/retur_index',$data);
 	}
 
+	public function print_now($id = ""){
+		$details = $this->retur_purchase->get_detail_by_id($id);
+		if($details){
+			$data['details'] = $details;
+			$this->load->view("retur_purchase/print",$data);
+		}else{
+			redirect(site_url('retur_purchase?page'));
+		}
+	}
+
 	function create_retur($id){
 		$data['judul_app'] = $this->setting_model->get_by_id(1);
 		// destry cart

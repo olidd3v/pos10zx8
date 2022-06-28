@@ -16,6 +16,7 @@
                     <ul class="nav nav-tabs">
                         <li role="presentation"><a href="<?php echo site_url('retur_purchase/create');?>">Input Retur Purchase</a></li>
                         <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase');?>">List Retur Purchase</a></li>
+                        <li role="presentation"><a href="<?php echo site_url('retur_purchase/report');?>">Report Retur Purchase</a></li>
                     </ul>
                     <div class="box">
                         <div class="box-header">
@@ -25,6 +26,7 @@
 								<?php if($details[0]->is_return == 0){?>
                                 <span><a href="<?php echo site_url('retur_purchase/edit');?>/<?php echo $details[0]->id;?>" class="btn btn-sm btn-success">Edit</a></span>								
 								<?php } ?>
+                                <span><a href="<?php echo site_url('retur_purchase/print_now').'/'.$details[0]->id;?>" class="btn btn-sm btn-primary btnPrint"><i class="fa fa-print"></i> Print</a></span>
                             </div>
                         </div>
                         <!-- /.box-header -->
