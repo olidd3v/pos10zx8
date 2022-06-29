@@ -100,7 +100,7 @@
                 <tr>
                   <th colspan="2">Total</th>
                   <th id="total"></th>
-                  <th id="harga"></th>
+                  <th colspan="3" id="harga"></th>
                 </tr>
                 </tfoot>
               </table>
@@ -124,7 +124,28 @@
     {
       var divToPrint=document.getElementById("example1");
       newWin= window.open("");
+      newWin.document.write("<div style='margin-bottom: 10px; text-align: center;'> <h1> Laporan Penjualan Barang</h1><h3><?php echo $_GET['date_from'].' - '.$_GET['date_end']; ?></h3><hr></div>");
       newWin.document.write(divToPrint.outerHTML);
+      var css =`table, tfoot, td, th {
+          border: 1px solid #000;
+          text-align:left;
+          padding: 0px 5px;
+          width: 80%;
+      }
+
+      html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+
+      tfoot {
+          height: 30px;
+      }
+
+      th {
+          background-color: #7a7878;
+          text-align:left
+      }`;
+    var div = $("<div />", {
+      html: '&shy;<style>' + css + '</style>'
+    }).appendTo( newWin.document.body);
       newWin.print();
       newWin.close();
     }

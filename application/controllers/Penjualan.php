@@ -11,6 +11,7 @@ class Penjualan extends MY_Controller {
 		$this->load->model('kategori_model');
 		$this->load->model('produk_model');
 		$this->load->model('setting_model');
+		$this->load->model('trans_model');
 		
 		// Check Session Login
 		if(!isset($_SESSION['logged_in'])){
@@ -184,7 +185,8 @@ class Penjualan extends MY_Controller {
 			echo "false";
 		}
 	}
-	public function add_process(){
+	public function add_process(){		
+
 		$this->form_validation->set_rules('sales_id', 'sales_id', 'required');
 		$this->form_validation->set_rules('customer_id', 'customer_id', 'required');
 		$this->form_validation->set_rules('is_cash', 'is_cash', 'required');
@@ -194,6 +196,14 @@ class Penjualan extends MY_Controller {
 			echo json_encode(array('status' => 'limit'));
 			exit;
 		}
+
+		$trans = array(
+			'code' => escape($this->input->post('sales_id')),
+			'total' => escape($this->input->post('total_pen')),
+			'dibayar' => escape($this->input->post('diterima')),
+			'kembalian' => escape($this->input->post('inpt_kembalian'))
+		);
+		$this->trans_model->insert($trans);
 		
 		if($this->form_validation->run() != FALSE && !empty($carts) && is_array($carts)){
 			$data['id'] = escape($this->input->post('sales_id'));
@@ -281,8 +291,11 @@ class Penjualan extends MY_Controller {
 	}
 	public function print_now($id = ""){
 		$details = $this->penjualan_model->get_detail($id);
+		$data['judul_app'] = $this->setting_model->get_by_id(1);
+		$res = $this->trans_model->get_by_id($id);
 		if($details){
 			$data['details'] = $details;
+			$data['res'] = $res;
 			$this->load->view("penjualan/print",$data);
 		}else{
 			redirect(site_url('penjualan?page'));

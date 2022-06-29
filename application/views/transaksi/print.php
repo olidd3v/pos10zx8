@@ -129,7 +129,7 @@
         </table>
         <?php echo $line;?>
         <br />
-        <table>
+        <table style="display: none;">
             <thead>
             <tr>
                 <!-- <td style="width:180px;text-align: center;">Pembeli</td> -->

@@ -16,6 +16,7 @@
                     <ul class="nav nav-tabs">
                         <li role="presentation"><a href="<?php echo site_url('penjualan/create');?>">Input Penjualan</a></li>
                         <li role="presentation" class="active"><a href="<?php echo site_url('penjualan');?>">List Penjualan</a></li>
+                        <li role="presentation"><a href="<?php echo site_url('penjualan/report');?>">Report Penjualan</a></li>
                     </ul>
                     <div class="box">
                         <div class="box-header">

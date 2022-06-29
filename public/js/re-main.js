@@ -111,16 +111,16 @@ var $el = $("body");
                 if(status == 'success' && data != 'false') {
                     var value = $.parseJSON(data);
                     var val = value[0];
-                    var sale_value = '<option value="' + val.sale_price + '">' + price(parseInt(val.sale_price)) + ' Default</option>';
-                    if(val.sale_price_type1 != "0"){
-                        var type1 = '<option value="' + val.sale_price_type1 + '">' + price(parseInt(val.sale_price_type1)) + ' Type 1 </option>';
-                    }
-                    if(val.sale_price_type2 != "0"){
-                        var type2 = '<option value="' + val.sale_price_type2 + '">' + price(parseInt(val.sale_price_type2)) + ' Type 2</option>';
-                    }
-                    if(val.sale_price_type3 != "0") {
-                        var type3 = '<option value="' + val.sale_price_type3 + '">' + price(parseInt(val.sale_price_type3)) + ' Type 3</option>';
-                    }
+                    var sale_value = '<option value="' + val.sale_price + '">' + price(parseInt(val.sale_price)) + '</option>';
+                    // if(val.sale_price_type1 != "0"){
+                    //     var type1 = '<option value="' + val.sale_price_type1 + '">' + price(parseInt(val.sale_price_type1)) + ' Type 1 </option>';
+                    // }
+                    // if(val.sale_price_type2 != "0"){
+                    //     var type2 = '<option value="' + val.sale_price_type2 + '">' + price(parseInt(val.sale_price_type2)) + ' Type 2</option>';
+                    // }
+                    // if(val.sale_price_type3 != "0") {
+                    //     var type3 = '<option value="' + val.sale_price_type3 + '">' + price(parseInt(val.sale_price_type3)) + ' Type 3</option>';
+                    // }
                     $('#sale_price').append(sale_value+type1+type2+type3);
                 }
             });
@@ -156,11 +156,12 @@ var $el = $("body");
                             //row_2 = "colspan='2'";
                         }
                         var display = '<tr class="cart-value" id="'+ key +'">' +
-                                    '<td>'+ value.category_name +'</td>' +
-                                    '<td>'+ value.name +'</td>' +
-                                    '<td>'+ value.qty +'</td>' +
+                                    // '<td>'+ value.category_name +'</td>' +
+                                    '<td style="width: 300px;">'+ value.name +'</td>' +
+                                    '<td style="width: 300px;">'+ value.qty +'</td>' +
                                     '<th '+row_2+'>Rp'+ price(value.subtotal) +'</th>' +
-                                    '<td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="'+ key +'">x</span></td>' +
+                                    '<td></td>' +
+                                    '<td style="width: 300px;"><span class="btn btn-danger transaksi-delete-item form-control" data-cart="'+ key +'">Delete Barang</span></td>' +
                                     '</tr>';
                         $("#transaksi-item tr:last").after(display);
                     });
@@ -310,13 +311,19 @@ var $el = $("body");
         var sales_id = $("#penjualan_id").val();
         var customer_id = $("#customer_id").val();
         var is_cash = $("#is_cash").val();
+        var total_pen = $("#total_pen").val();
+        var diterima = $("#diterima").val();
+        var inpt_kembalian = $("#inpt_kembalian").val();
         if(typeof sales_id !== "undefined" && sales_id != ""){
             var status = true;
             var method = "penjualan";
             var arr = {
                 'sales_id': sales_id,
                 'customer_id': customer_id,
-                'is_cash' : is_cash
+                'is_cash' : is_cash,
+                'total_pen' : total_pen,
+                'diterima' : diterima,
+                'inpt_kembalian' : inpt_kembalian
             };
             data = [status,method,arr];
         }

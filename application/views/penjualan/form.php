@@ -79,16 +79,18 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <td style="display: none;">Kategori</td>
-                          <td>Nama Barang</td>
+                          <!-- <td></td> -->
+                          <td style="width: 500px;">Nama Barang</td>
                           <td>Jumlah</td>
-                          <td>Harga Beli Satuan</td>
+                          <td style="width: 500px;">Harga Beli Satuan</td>
+                          <td></td>
                           <td>Input Barang</td>
                         </tr>
                       </thead>
                       <tbody id="transaksi-item">
                         <tr>
                           <td style="display: none;">
+                            <div style="display: none;">
                             <select class="form-control select2" id="transaksi_category_id" name="category_id">
                               <option value="0">
                                 Please select one
@@ -101,10 +103,12 @@
                                 <?php }?>
                               <?php }?>
                             </select>
+                            </div>
                           </td>
                           <td>
-                            <select class="form-control select2" id="transaksi_product_id" name="product_id" style="width: 100%;">
+                            <select class="form-control select2" id="transaksi_product_id" name="product_id" style="width: 200px;">
                             <?php if(isset($produks) && is_array($produks)){?>
+                                  <option value="0">Silahkan pilih produk</option>
                                 <?php foreach($produks as $item){?>
                                   <option value="<?php echo $item->id;?>">
                                     <?php echo $item->product_name;?>
@@ -114,23 +118,25 @@
                             </select>
                           </td>
                           <td>
-                            <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
+                            <input style="width: 200px;" type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
                           </td>
                           <td>
-                            <select class="form-control" id="sale_price" name="sale_price"></select>
+                            <select class="form-control" id="sale_price" name="sale_price" style="width: 120px;"></select>
                           </td>
+                          <td></td>
                           <td>
-                            <a href="#" class="btn btn-primary" id="tambah-barang">Input Barang</a>
+                            <a href="#" class="btn btn-primary form-control" id="tambah-barang">Input Barang</a>
                           </td>
                         </tr>
                         <?php if(!empty($carts) && is_array($carts)){?>
                             <?php foreach($carts['data'] as $k => $cart){?>
                               <tr id="<?php echo $k;?>" class="cart-value">
-                                <td><?php echo $cart['category_name'];?></td>
-                                <td><?php echo $cart['name'];?></td>
+                                <!-- <td style="display: none;"></td> -->
+                                <!-- <td><?php echo $cart['category_name'];?></td> -->
+                                <td style="width: 300px;"><?php echo $cart['name'];?></td>
                                 <td><?php echo $cart['qty'];?></td>
-                                <td>Rp<?php echo number_format($cart['price']);?></td>
-                                <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
+                                <td style="width: 300px;">Rp<?php echo number_format($cart['price']);?></td>
+                                <td style="width: 300px;"><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
                             <?php }?>
                         <?php }?>
@@ -138,7 +144,16 @@
                       <tfoot>
                         <tr>
                           <td>Total Penjualan</td>
-                          <td id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></td>
+                          <td id="total-pembelian"><?php echo !empty($carts) ? $carts['total_price'] : '';?></td>
+                          <td>Dibayar</td>
+                          <td><div id="dibayar" style="width: 200px;"></div><input type="hidden" name="total_pen" id="total_pen"></td>
+                          <div id="total-pembelian-hidden" style="display: none;"></div>
+                        </tr>
+                        <tr>
+                          <td>Uang Diterima</td>
+                          <td><input type="number" name="dibayar" id="diterima" class="form-control" oninput="ch();" required="required"></td>
+                          <td>Kembalian</td>
+                          <td><input type="hidden" id="inpt_kembalian" name="kembalian"><span id="kembalian"></span></td>
                         </tr>
                       </tfoot>
                     </table>
@@ -149,7 +164,7 @@
               <div class="box-footer">
                 <div class="col-md-3 col-md-offset-4">
                   <a class="btn btn-default" href="<?php echo site_url('penjualan?page');?>">Cancel</a>
-                  <a class="btn btn-info pull-right" href="#" id="submit-transaksi">Submit</a>
+                  <button type="submit" class="btn btn-info pull-right" id="submit-transaksi">Submit</a>
                 </div>
               </div>
               <!-- /.box-footer -->
@@ -163,4 +178,33 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <script>
+
+    function ch(){
+      var x = document.getElementById("diterima").value;
+      var tox = Number(x).toLocaleString();
+
+      var h = document.getElementById("total-pembelian-hidden").innerHTML;
+      var numberx = h;
+      var stringValuex = parseFloat(numberx.replace(/,/g, ""));
+
+      document.getElementById("total_pen").value = stringValuex; 
+      if (x){
+        var total_h = document.getElementById("total-pembelian-hidden").innerHTML;
+        var inp  = document.getElementById("diterima").value;
+        var number = total_h;
+        var stringValue = parseFloat(number.replace(/,/g, ""));
+        
+        var result = inp - stringValue;
+        var to = result.toLocaleString();
+        var rp = "Rp";
+        document.getElementById("inpt_kembalian").value = inp - stringValue; 
+
+        document.getElementById("kembalian").innerHTML = rp+to;
+        document.getElementById("dibayar").innerHTML = rp+tox;
+      } else {
+        document.getElementById("dibayar").innerHTML = "";
+      }
+    }
+    </script>
 <?php $this->load->view('element/footer');?>

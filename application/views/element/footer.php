@@ -50,7 +50,8 @@
 		<script src="<?php echo base_url('public');?>/js/jquery.printPage.js"></script>
 		<script src="<?php echo base_url('public');?>/plugins/jquery-price-format/jquery.price_format.2.0.min.js"></script>
 		<!-- main JS -->
-		<script src="<?php echo base_url('public');?>/js/main.js"></script>
+		<script src="<?php echo base_url('public');?>/js/re-main.js"></script>
+		<!-- <script src="<?php echo base_url('public');?>/js/main.js"></script> -->
 		<script>
 		  $(function () {
 			$('input').iCheck({
