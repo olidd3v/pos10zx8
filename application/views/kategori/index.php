@@ -66,12 +66,6 @@
                                 <?php } ?>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>Code ID</th>
-                                    <th>Kategori Name</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr>
                                 </tfoot>
                             </table>
                         </div>

@@ -62,13 +62,6 @@
                                 <?php } ?>
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
                                 </tfoot>
                             </table>
                         </div>

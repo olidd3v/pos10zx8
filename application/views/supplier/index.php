@@ -72,13 +72,6 @@
 				<?php } ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                  <th>Code ID</th>
-                  <th>Supplier Name</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Action</th>
-                </tr>
                 </tfoot>
               </table>
             </div>
