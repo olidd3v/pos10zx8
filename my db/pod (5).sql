@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 12:32 PM
+-- Generation Time: Jun 30, 2022 at 12:47 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -68,7 +68,7 @@ INSERT INTO `product` (`id`, `product_name`, `category_id`, `product_desc`, `pro
 ('MAS10', 'Maspion', 'KAT1', 'Maspion Kipas Baru', 74, 120000, '2016-05-26 14:27:15'),
 ('PHIL001', 'Philip Lampu', 'LAMP', 'Philip 12watt', 0, 80000, '2016-05-26 16:00:13'),
 ('SAM100', 'Samsung TV', 'TV', 'TV 52inc', 121, 6200000, '2016-05-26 15:58:15'),
-('SAM2100', 'Samsung 2100', 'KAT1', 'Samsung Kipas', 5, 210000, '2016-05-29 14:26:41'),
+('SAM2100', 'Samsung 2100', 'KAT1', 'Samsung Kipas', 4, 210000, '2016-05-29 14:26:41'),
 ('TOS10', 'Toshiba 21', 'TV', '', 89, 1600000, '2016-05-26 14:28:21');
 
 -- --------------------------------------------------------
@@ -167,7 +167,6 @@ CREATE TABLE `sales_data` (
   `quantity` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `price_item` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `subtotal` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=Sales Transaction, 0=Sales Retur',
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -175,18 +174,19 @@ CREATE TABLE `sales_data` (
 -- Dumping data for table `sales_data`
 --
 
-INSERT INTO `sales_data` (`id`, `sales_id`, `product_id`, `category_id`, `quantity`, `price_item`, `subtotal`, `type`, `date`) VALUES
-(1, 'OUT1656556726', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 02:39:08'),
-(2, 'OUT1656556909', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 02:42:47'),
-(3, 'OUT1656564638', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 04:50:49'),
-(4, 'OUT1656564671', '12312', 'KAT1', '1', '12', '12', 1, '2022-06-30 04:51:19'),
-(5, 'OUT1656564789', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 04:54:23'),
-(6, 'OUT1656565193', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 05:00:04'),
-(7, 'OUT1656565440', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 05:04:13'),
-(8, 'OUT1656569375', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 06:09:44'),
-(9, 'OUT1656569421', 'SAM2100', 'KAT1', '1', '210000', '210000', 1, '2022-06-30 06:10:32'),
-(10, 'OUT1656571757', '12312', 'KAT1', '1', '12', '12', 1, '2022-06-30 06:49:25'),
-(11, 'OUT1656582552', '12312', 'KAT1', '1', '12', '12', 1, '2022-06-30 09:49:26');
+INSERT INTO `sales_data` (`id`, `sales_id`, `product_id`, `category_id`, `quantity`, `price_item`, `subtotal`, `date`) VALUES
+(1, 'OUT1656556726', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 02:39:08'),
+(2, 'OUT1656556909', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 02:42:47'),
+(3, 'OUT1656564638', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 04:50:49'),
+(4, 'OUT1656564671', '12312', 'KAT1', '1', '12', '12', '2022-06-30 04:51:19'),
+(5, 'OUT1656564789', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 04:54:23'),
+(6, 'OUT1656565193', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 05:00:04'),
+(7, 'OUT1656565440', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 05:04:13'),
+(8, 'OUT1656569375', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 06:09:44'),
+(9, 'OUT1656569421', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 06:10:32'),
+(10, 'OUT1656571757', '12312', 'KAT1', '1', '12', '12', '2022-06-30 06:49:25'),
+(11, 'OUT1656582552', '12312', 'KAT1', '1', '12', '12', '2022-06-30 09:49:26'),
+(12, 'OUT1656585993', 'SAM2100', 'KAT1', '1', '210000', '210000', '2022-06-30 10:46:44');
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,8 @@ INSERT INTO `sales_transaction` (`id`, `customer_id`, `is_cash`, `total_price`, 
 ('OUT1656569375', 'asdas', 1, 210000, 1, '2022-06-30 06:09:44'),
 ('OUT1656569421', '123', 1, 210000, 1, '2022-06-30 06:10:32'),
 ('OUT1656571757', 'tasdasd', 1, 12, 1, '2022-06-30 06:49:25'),
-('OUT1656582552', 'xxx', 1, 12, 1, '2022-06-30 09:49:26');
+('OUT1656582552', 'xxx', 1, 12, 1, '2022-06-30 09:49:26'),
+('OUT1656585993', '74', 1, 210000, 1, '2022-06-30 10:46:44');
 
 -- --------------------------------------------------------
 
@@ -296,7 +297,8 @@ INSERT INTO `trans` (`id`, `code`, `total`, `dibayar`, `kembalian`) VALUES
 (10, 'OUT1656571757', 12, 13, 1),
 (11, 'OUT1656582430', 12, 13, 1),
 (12, 'OUT1656582462', 210000, 250000, 40000),
-(13, 'OUT1656582552', 12, 13, 1);
+(13, 'OUT1656582552', 12, 13, 1),
+(14, 'OUT1656585993', 210000, 250000, 40000);
 
 -- --------------------------------------------------------
 
@@ -416,7 +418,7 @@ ALTER TABLE `purchase_data`
 -- AUTO_INCREMENT for table `sales_data`
 --
 ALTER TABLE `sales_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `setting`
@@ -428,7 +430,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user`
