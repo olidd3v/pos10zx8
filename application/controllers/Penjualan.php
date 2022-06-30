@@ -7,7 +7,6 @@ class Penjualan extends MY_Controller {
 		$this->load->model('auth_model');
         $this->load->library('form_validation');
 		$this->load->model('penjualan_model');
-		$this->load->model('pelanggan_model');
 		$this->load->model('kategori_model');
 		$this->load->model('produk_model');
 		$this->load->model('setting_model');
@@ -77,7 +76,6 @@ class Penjualan extends MY_Controller {
 		$this->cart->destroy();
 
 		$data['code_penjualan'] = "OUT".strtotime(date("Y-m-d H:i:s"));
-		// $data['customers'] = $this->pelanggan_model->get_all();
 		$data['produks'] = $this->produk_model->get_all();
 		$data['kategoris'] = $this->kategori_model->get_all();
 		$this->load->view('penjualan/form',$data);

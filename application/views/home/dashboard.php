@@ -100,7 +100,7 @@
             <span class="info-box-icon bg-red"><i class="fa fa-share"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">Retur</span>
-              <span class="info-box-number"><?php echo $retur_penjualan_model;?></span>
+              <span class="info-box-number"><?php echo $retur_purchase_model;?></span>
             </div>
           </div>
         </div>

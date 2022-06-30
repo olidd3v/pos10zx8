@@ -9,10 +9,6 @@ class Retur_purchase extends MY_Controller {
 		$this->load->model('retur_purchase_model');
 		$this->load->model('transaksi_model');
 		$this->retur_purchase = $this->retur_purchase_model;
-
-		$this->load->model('retur_penjualan_model');
-		$this->penjualan = $this->retur_penjualan_model;
-		$this->load->model('pelanggan_model');
 		$this->load->model('penjualan_model');
 		$this->load->model('kategori_model');
 		$this->load->model('produk_model');
@@ -128,7 +124,6 @@ class Retur_purchase extends MY_Controller {
 		$data['carts'] = $cart_data;
 		$data['code_penjualan'] = $id;
 		$data['code_retur_penjualan'] = "RETP".strtotime(date("Y-m-d H:i:s"));
-		$data['customers'] = $this->pelanggan_model->get_all();
 		$data['kategoris'] = $this->kategori_model->get_all();
 		$data['details'] = $details;
 		$this->load->view('retur_purchase/form',$data);

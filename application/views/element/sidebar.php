@@ -32,23 +32,7 @@
 
       <?php if ($_SESSION['role'] == 1) {?>
         <ul class="sidebar-menu">
-        <!--<li class="header">HEADER</li>-->
-        <!-- Optionally, you can add icons to the links -->
-        <li class="<?php echo is_menu('home','dashboard');?>"><a href="<?php echo site_url();?>"><i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a></li>
-        <li class="treeview <?php echo is_menu('supplier');?>">
-          <a href="#"><i class="fa fa-users"></i> <span>Supplier</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu"> 
-			<li class="<?php echo is_menu('supplier');?>"><a href="<?php echo site_url('supplier');?>"><i class="fa fa-users" aria-hidden="true"></i> <span>List Supplier</span></a></li>
-			<li class="<?php echo is_menu('supplier','create');?>"><a href="<?php echo site_url('supplier/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Supplier</span></a></li>
-          </ul>
-        </li>
-        <!-- <li class="treeview <?php echo is_menu('pelanggan');?>">
-          <a href="#"><i class="fa fa-user"></i> <span>Pelanggan</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li class="<?php echo is_menu('pelanggan');?>"><a href="<?php echo site_url('pelanggan');?>"><i class="fa fa-user" aria-hidden="true"></i> <span>List Pelanggan</span></a></li>
-            <li class="<?php echo is_menu('pelanggan','create');?>"><a href="<?php echo site_url('pelanggan/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Pelanggan</span></a></li>
-          </ul>
-        </li> -->
+      <li class="<?php echo is_menu('home','dashboard');?>"><a href="<?php echo site_url();?>"><i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a></li>
         <li class="treeview <?php echo is_menu('kategori');?>">
           <a href="#"><i class="fa fa-th-large"></i> <span>Kategori</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
@@ -79,14 +63,6 @@
 			      <li class="<?php echo is_menu('penjualan','report');?>"><a href="<?php echo site_url('penjualan/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Penjualan</span></a></li>
           </ul>
         </li>
-        <!-- <li class="<?php echo is_menu('tunggakan');?>"><a href="<?php echo site_url('tunggakan');?>"><i class="fa fa-money" aria-hidden="true"></i> <span>List Tunggakan</span></a></li> -->
-        <!-- <li class="treeview <?php echo is_menu('retur_penjualan');?>">
-          <a href="#"><i class="fa fa-random"></i> <span>Retur Penjualan</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li class="<?php echo is_menu('retur_penjualan');?>"><a href="<?php echo site_url('retur_penjualan');?>"><i class="fa fa-random" aria-hidden="true"></i> <span>List Retur Penjualan</span></a></li>
-            <li class="<?php echo is_menu('retur_penjualan','create');?>"><a href="<?php echo site_url('retur_penjualan/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Retur Penjualan</span></a></li>
-          </ul>
-        </li> -->
         <li class="treeview <?php echo is_menu('retur_purchase');?>">
           <a href="#"><i class="fa fa-share"></i> <span>Retur Purhcase</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
@@ -107,14 +83,6 @@
       <?php } elseif ($_SESSION['role'] == 0) {?>
       <ul class="sidebar-menu">
       <li class="<?php echo is_menu('home','dashboard');?>"><a href="<?php echo site_url();?>"><i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a></li>
-		  <!-- <li class="treeview <?php echo is_menu('transaksi');?>">
-          <a href="#"><i class="fa fa-cart-plus"></i> <span>Transaksi Pembelian</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu"> 
-			<li class="<?php echo is_menu('transaksi');?>"><a href="<?php echo site_url('transaksi');?>"><i class="fa fa-area-chart" aria-hidden="true"></i> <span>List Transaksi</span></a></li>
-			<li class="<?php echo is_menu('transaksi','create');?>"><a href="<?php echo site_url('transaksi/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Transaction</span></a></li>
-			<li class="<?php echo is_menu('transaksi','report');?>"><a href="<?php echo site_url('transaksi/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Transaction</span></a></li>
-          </ul>
-        </li> -->
         <li class="treeview <?php echo is_menu('penjualan');?>">
           <a href="#"><i class="fa fa-cart-plus"></i> <span>Transaksi Penjualan</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
@@ -123,22 +91,6 @@
 			      <li class="<?php echo is_menu('penjualan','report');?>"><a href="<?php echo site_url('penjualan/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Penjualan</span></a></li>
           </ul>
         </li>
-        <!-- <li class="treeview <?php echo is_menu('retur_purchase');?>">
-          <a href="#"><i class="fa fa-share"></i> <span>Retur Purhcase</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li class="<?php echo is_menu('retur_purchase');?>"><a href="<?php echo site_url('retur_purchase');?>"><i class="fa fa-share" aria-hidden="true"></i> <span>List Retur Purchase</span></a></li>
-            <li class="<?php echo is_menu('retur_purchase','create');?>"><a href="<?php echo site_url('retur_purchase/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Retur Purchase</span></a></li>
-			      <li class="<?php echo is_menu('retur_purchase','report');?>"><a href="<?php echo site_url('retur_purchase/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Retur Purchase</span></a></li>
-          </ul>
-        </li> -->
-        <!-- <li class="treeview <?php echo is_menu('user');?>">
-          <a href="#"><i class="fa fa-user"></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li class="<?php echo is_menu('user');?>"><a href="<?php echo site_url('user');?>"><i class="fa fa-th-large" aria-hidden="true"></i> <span>List User</span></a></li>
-            <li class="<?php echo is_menu('user','create');?>"><a href="<?php echo site_url('user/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add User</span></a></li>
-          </ul>
-        </li>
-        <li class="<?php echo is_menu('setting','edit/1');?>"><a href="<?php echo site_url('setting/edit/1');?>"><i class="fa fa-gear" aria-hidden="true"></i> <span>Setting</span></a></li> -->
       </ul>
       <?php } else {?>
       <?php } ?>
