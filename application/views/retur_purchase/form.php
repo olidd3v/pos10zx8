@@ -100,7 +100,7 @@
                               <tr id="<?php echo $k;?>" class="cart-value">
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
-                                <td><input type="number" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1"/></td>
+                                <td><input type="number" id="t-ret" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
@@ -121,7 +121,7 @@
               <div class="box-footer">
                 <div class="col-md-3 col-md-offset-4">
                   <a class="btn btn-default" href="<?php echo site_url('retur_purchase');?>">Cancel</a>
-                  <a class="btn btn-info pull-right" href="#" id="submit-transaksi">Submit</a>
+                  <button type="submit" id="submit-transaksi" class="btn btn-info pull-right">Submit</button>
                 </div>
               </div>
               <!-- /.box-footer -->
@@ -135,4 +135,17 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <script>
+        function runx(){
+          var con = document.getElementById("t-ret").value;
+          var btn = document.getElementById("submit-transaksi");
+
+          if (con > <?php echo $details[0]->total_item;?> ) {
+            alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
+            btn.style.display = "none";
+          } else {
+            btn.style.display = "block";
+          }
+        }
+    </script>
 <?php $this->load->view('element/footer');?>

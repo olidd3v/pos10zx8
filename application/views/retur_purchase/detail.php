@@ -48,7 +48,8 @@
                                         <td><?php echo ($details[0]->is_return == 1) ? "Yes" : "No";?></td>
                                         <td><?php echo $details[0]->total_item;?></td>
                                         <td>Rp<?php echo number_format($details[0]->total_price);?></td>
-                                        <td><?php echo $details[0]->return_by == 1 ? "Uang" : "Barang";?></td>
+                                        <td><?php echo "Barang";?></td>
+                                        <!-- <td><?php echo $details[0]->return_by == 1 ? "Uang" : "Barang";?></td> -->
                                         <td><?php echo $details[0]->date;?></td>
                                     </tr>
                                 </tbody>
