@@ -110,9 +110,15 @@
                             <?php if(isset($produks) && is_array($produks)){?>
                                   <option value="0">Silahkan pilih produk</option>
                                 <?php foreach($produks as $item){?>
-                                  <option value="<?php echo $item->id;?>">
-                                    <?php echo $item->product_name;?>
-                                  </option>
+                                  <?php if ($item->product_qty > 0) { ?>
+                                    <option value="<?php echo $item->id;?>">
+                                    <?php echo $item->product_name;?> - <?php echo $item->product_qty;?>
+                                    </option>
+                                  <?php } else {?>
+                                    <option value="<?php echo $item->id;?>" disabled>
+                                    <?php echo $item->product_name;?> - <?php echo $item->product_qty;?>
+                                    </option>
+                                    <?php } ?>
                                 <?php }?>
                               <?php }?>
                             </select>

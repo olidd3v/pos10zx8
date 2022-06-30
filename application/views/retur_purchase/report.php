@@ -131,7 +131,7 @@
           border: 1px solid #000;
           text-align:left;
           padding: 0px 5px;
-          width: 80%;
+          width: 100%;
       }
 
       html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
