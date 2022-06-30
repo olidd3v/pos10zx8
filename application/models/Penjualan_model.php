@@ -7,12 +7,12 @@ class Penjualan_model extends CI_Model {
 	function __construct(){
         parent::__construct();
 		$this->table = "sales_transaction";
-		$this->select_default = 'sales_transaction.id AS id, customer_name, customer_id, customer_phone, total_price, total_item,sales_transaction.date AS date,sales_transaction.pay_deadline_date,sales_transaction.is_cash';
+		$this->select_default = 'sales_transaction.id AS id, customer_id, total_price, total_item,sales_transaction.date AS date,sales_transaction.is_cash';
 	}
 	
 	public function get_all($limit_offset = array()){
 		$this->db->select($this->select_default);
-		$this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
+		// $this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
 		$this->db->order_by("date", "desc");
 		if(!empty($limit_offset)){
 			$query = $this->db->get($this->table,$limit_offset['limit'],$limit_offset['offset']);
@@ -71,14 +71,11 @@ class Penjualan_model extends CI_Model {
 
 	public function get_filter_csv($filter = ''){
 		$this->db->select('sales_transaction.id AS id, sales_transaction.total_price, sales_transaction.total_item,sales_transaction.date AS date,
-					sales_transaction.is_cash, sales_transaction.pay_deadline_date,
-					customer.id as customer_id,customer.customer_name,customer.customer_phone,customer.customer_address,
-					category.category_name,
+					sales_transaction.is_cash, category.category_name,
 					product.id as product_id,product.product_name,product.product_desc,
 					sales_data.quantity,sales_data.price_item,sales_data.subtotal');
 
 		$this->db->join('sales_data', 'sales_transaction.id = sales_data.sales_id');
-		$this->db->join('customer', 'customer.id = sales_transaction.customer_id');
 		$this->db->join('category', 'category.id = sales_data.category_id');
 		$this->db->join('product', 'product.id = sales_data.product_id');
 		

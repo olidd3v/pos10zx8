@@ -6,8 +6,8 @@ class Retur_penjualan_model extends CI_Model {
 	private $select_default;
 	function __construct(){
         parent::__construct();
-		$this->table = "sales_retur";
-		$this->select_default = '*, sales_retur.id AS id, sales_id,total_price, total_item,sales_retur.date AS date';
+		$this->table = "sales_data";
+		$this->select_default = '*, sales_data.id AS id, sales_id,total_price, total_item,sales_data.date AS date';
 	}
 	
 	public function get_all($limit_offset = array()){
@@ -56,8 +56,8 @@ class Retur_penjualan_model extends CI_Model {
 		$this->db->delete("sales_data", array('sales_id' => $sales_id));
 	}
 	public function get_detail($sales_id){
-		$sql = "SELECT *, sales_retur.id AS id, product.id as product_id FROM sales_retur 
-				JOIN sales_data ON sales_retur.id = sales_data.sales_id 
+		$sql = "SELECT *, sales_data.id AS id, product.id as product_id FROM sales_data 
+				JOIN sales_data ON sales_data.id = sales_data.sales_id 
 				JOIN product ON product.id = sales_data.product_id 
 				JOIN category ON category.id = sales_data.category_id 
 				WHERE sales_data.sales_id = '".$sales_id."'";
@@ -65,11 +65,11 @@ class Retur_penjualan_model extends CI_Model {
 		return $query->result();
 	}
 	public function get_detail_by_id($id){
-		$sql = "SELECT *, sales_retur.id AS id, product.id as product_id 
-				FROM sales_retur JOIN sales_data ON sales_retur.id = sales_data.sales_id 
+		$sql = "SELECT *, sales_data.id AS id, product.id as product_id 
+				FROM sales_data JOIN sales_data ON sales_data.id = sales_data.sales_id 
 					JOIN product ON product.id = sales_data.product_id 
 					JOIN category ON category.id = sales_data.category_id 
-			  	WHERE sales_retur.id = '".$id."'";
+			  	WHERE sales_data.id = '".$id."'";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}

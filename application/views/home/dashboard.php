@@ -3,6 +3,15 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <?php if($this->session->flashdata('msg')){?>
+		<div class="alert alert-success alert-dismissible">
+			<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+			<h4>
+				<i class="icon fa fa-check"></i>Login Success!
+			</h4>
+			<?php echo $this->session->flashdata('msg');?>, <?php echo $this->username;?>!
+		</div>
+	  <?php } ?>
       <h1>
         Dashboard
         <small>Home Dashboard</small>

@@ -6,7 +6,6 @@ class Home extends MY_Controller {
         parent::__construct();
 		$this->load->model('auth_model');
 		$this->load->model('supplier_model');
-		$this->load->model('pelanggan_model');
 		$this->load->model('produk_model');
 		$this->load->model('kategori_model');
     $this->load->model('penjualan_model');
@@ -31,18 +30,16 @@ class Home extends MY_Controller {
 		$filter['DATE(sales_transaction.pay_deadline_date) <='] = $date;
 		$limit_offset['limit'] = 10;
 		$limit_offset['offset'] = 0;
-        $data['tunggakans'] = $this->penjualan_model->get_filter_tunggakan($filter,$limit_offset);
+        // $data['tunggakans'] = $this->penjualan_model->get_filter_tunggakan($filter,$limit_offset);
 		
 		$data['suppliers'] = $this->supplier_model->count_total();
-		$data['customers'] = $this->pelanggan_model->count_total();
+		// $data['customers'] = $this->pelanggan_model->count_total();
 		$data['penjualan_model'] = $this->penjualan_model->count_total();
 		$data['transaksi_model'] = $this->transaksi_model->count_total();
 		$data['retur_penjualan_model'] = $this->retur_penjualan_model->count_total();
 		$data['products'] = $this->produk_model->count_total();
 		$data['categories'] = $this->kategori_model->count_total();
-		$data['penjualan_harian'] = $this->penjualan_daily();
-		$data['penjualan_bulanan'] = $this->penjualan_daily(true);
-		$data['sales_retur'] = $this->retur_penjualan_model->get_all_not_returned();
+		// $data['sales_retur'] = $this->retur_penjualan_model->get_all_not_returned();
 		$this->load->view('home/dashboard',$data);
 	}
 	

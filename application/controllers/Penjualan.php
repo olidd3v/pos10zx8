@@ -77,7 +77,7 @@ class Penjualan extends MY_Controller {
 		$this->cart->destroy();
 
 		$data['code_penjualan'] = "OUT".strtotime(date("Y-m-d H:i:s"));
-		$data['customers'] = $this->pelanggan_model->get_all();
+		// $data['customers'] = $this->pelanggan_model->get_all();
 		$data['produks'] = $this->produk_model->get_all();
 		$data['kategoris'] = $this->kategori_model->get_all();
 		$this->load->view('penjualan/form',$data);
@@ -214,9 +214,9 @@ class Penjualan extends MY_Controller {
 			$this->session->set_flashdata('msg', $this->input->post('sales_id'));
 
 			if($data['is_cash'] == 0){
-				$data['pay_deadline_date'] = date('Y-m-d', strtotime("+30 days"));
+				// $data['pay_deadline_date'] = date('Y-m-d', strtotime("+30 days"));
 			}else{
-				$data['pay_deadline_date'] = date('Y-m-d');
+				// $data['pay_deadline_date'] = date('Y-m-d');
 			}
 
 			$this->penjualan_model->insert($data);
@@ -308,7 +308,7 @@ class Penjualan extends MY_Controller {
 			$data_before = "";
 			foreach($datas as $k => $data){
 				$datas[$k]['is_cash'] = ($data['is_cash'] == 1) ? "Cash" : "Bayar Nanti";
-				$datas[$k]['pay_deadline_date'] = ($data['is_cash'] == 1) ? "" : $data["pay_deadline_date"];
+				// $datas[$k]['pay_deadline_date'] = ($data['is_cash'] == 1) ? "" : $data["pay_deadline_date"];
 				$datas[$k]['date'] = date("Y-m-d H:i:s",strtotime($data['date']));
 				if($data['id'] == $data_before) {
 					$datas[$k]['id'] = "";
@@ -320,7 +320,7 @@ class Penjualan extends MY_Controller {
 					$datas[$k]['total_price'] = "";
 					$datas[$k]['total_item'] = "";
 					$datas[$k]['is_cash'] = "";
-					$datas[$k]['pay_deadline_date'] = "";
+					// $datas[$k]['pay_deadline_date'] = "";
 
 					$datas[$k]['date'] = "";
 				}

@@ -9,7 +9,7 @@ class Retur_purchase_model extends CI_Model {
         parent::__construct();
 		$this->table = "purchase_retur";
 		$this->table_data = "purchase_data";
-		$this->select_default = '*, purchase_retur.id AS id, sales_retur_id,total_price, total_item,purchase_retur.date AS date,return_by';
+		$this->select_default = '*, purchase_retur.id AS id, sales_retur_id,total_price, total_item,purchase_retur.date AS date';
 	}
 	
 	public function get_all($limit_offset = array()){

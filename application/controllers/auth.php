@@ -50,11 +50,11 @@ class Auth extends MY_Controller {
 			if($remember_me){
 				$this->auth_model->set_cookie_remember($username);
 			}
-			redirect(site_url());
+			$this->session->set_flashdata('msg', 'Selamat Datang');
+			redirect(site_url('home/dashboard'));
 		}else{
 			$this->session->set_flashdata('login_false', 'Username atau Password salah.');
-			$data['judul_app'] = $this->setting_model->get_by_id(1);
-			redirect(site_url('auth/login', $data));
+			redirect(site_url('auth/login'));
 		}
 	}
 	
