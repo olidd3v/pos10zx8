@@ -37,12 +37,6 @@
                       <input type="submit" value="Cari" class="form-control btn btn-primary">
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="submit">&nbsp</label>
-                      <a href="<?php echo site_url('supplier/export_csv').get_uri();?>" class="form-control btn btn-default"><i class="fa fa-file-excel-o"></i> Export Excel</a>
-                    </div>
-                  </div>
                 </div>
               </form>
               <table id="example1" class="table table-bordered table-striped">
