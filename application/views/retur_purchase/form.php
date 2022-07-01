@@ -141,6 +141,14 @@
 
           if (con > <?php echo $details[0]->total_item;?> ) {
             alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
+            location.reload();
+            btn.style.display = "none";
+          } else {
+            btn.style.display = "block";
+          }
+          if (con == 0 ) {
+            alert('Jumlah Barang Input Tidak Boleh Kosong!');
+            location.reload();
             btn.style.display = "none";
           } else {
             btn.style.display = "block";

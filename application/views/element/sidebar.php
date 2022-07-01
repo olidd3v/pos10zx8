@@ -33,6 +33,13 @@
       <?php if ($_SESSION['role'] == 1) {?>
         <ul class="sidebar-menu">
       <li class="<?php echo is_menu('home','dashboard');?>"><a href="<?php echo site_url();?>"><i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span></a></li>
+          <li class="treeview <?php echo is_menu('supplier');?>">
+          <a href="#"><i class="fa fa-users"></i> <span>Supplier</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu"> 
+			    <li class="<?php echo is_menu('supplier');?>"><a href="<?php echo site_url('supplier');?>"><i class="fa fa-users" aria-hidden="true"></i> <span>List Supplier</span></a></li>
+			    <li class="<?php echo is_menu('supplier','create');?>"><a href="<?php echo site_url('supplier/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Supplier</span></a></li>
+          </ul>
+        </li>
         <li class="treeview <?php echo is_menu('kategori');?>">
           <a href="#"><i class="fa fa-th-large"></i> <span>Kategori</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
