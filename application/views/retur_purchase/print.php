@@ -65,7 +65,7 @@
                 <tr>
                     <td></td>
                     <td valign="top">Return By</td>
-                    <td valign="top">: <?php echo $details[0]->return_by == 1 ? "Uang" : "Barang";?></td>
+                    <td valign="top">: Barang</td>
                 </tr>
                 <tr>
                     <td></td>

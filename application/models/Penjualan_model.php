@@ -90,7 +90,7 @@ class Penjualan_model extends CI_Model {
 
 	public function get_filter($filter = '',$limit_offset = array(),$is_array = false){
 		$this->db->select($this->select_default);
-		$this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
+		// $this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
 		$this->db->order_by("date", "desc");
 		if(!empty($filter)){
 			$this->db->where($filter);
@@ -134,7 +134,7 @@ class Penjualan_model extends CI_Model {
 	public function get_filter_tunggakan($filter = '',$limit_offset = array(),$is_array = false){
 		$filter['is_cash'] = 0;
 		$this->db->select($this->select_default);
-		$this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
+		// $this->db->join('customer', 'customer.id = sales_transaction.customer_id', 'left');
 		$this->db->where($filter);
 		if($limit_offset){
 			$this->db->limit($limit_offset['limit'],$limit_offset['offset']);
