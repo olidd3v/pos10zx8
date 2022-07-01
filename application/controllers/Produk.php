@@ -77,9 +77,9 @@ class Produk extends MY_Controller {
         $data['category_id'] = escape($this->input->post('category_id'));
         $data['product_desc'] = escape($this->input->post('product_desc'));
         $data['sale_price'] = escape($this->input->post('sale_price'));
-        $data['sale_price_type1'] = escape($this->input->post('sale_price_type1'));
-        $data['sale_price_type2'] = escape($this->input->post('sale_price_type2'));
-        $data['sale_price_type3'] = escape($this->input->post('sale_price_type3'));
+        // $data['sale_price_type1'] = escape($this->input->post('sale_price_type1'));
+        // $data['sale_price_type2'] = escape($this->input->post('sale_price_type2'));
+        // $data['sale_price_type3'] = escape($this->input->post('sale_price_type3'));
         $data['date'] = escape($this->input->post('product_date'));
 
         if ($this->form_validation->run() != FALSE && !empty($id)) {
