@@ -82,11 +82,15 @@
 						  </td>
 						  <td><?php echo $penjualan->total_item;?></td>
 						  <td>Rp<?php echo number_format($penjualan->total_price);?></td>
-						  <td><?php echo $penjualan->is_return == 1 ? "Complete" : "Not Complete";?></td>
+              <?php if ($penjualan->is_return == 1 ) { ?>
+						  <td>Complete</td>
+              <?php } else {?>
+						  <td>Not Complete</td>
+              <?php } ?>
 						  <td><?php echo $penjualan->date;?></td>
 						  <td>
 								<a href="<?php echo site_url('retur_purchase/detail').'/'.$penjualan->id;?>" class="btn btn-xs btn-default">Detail</a>
-							<?php if($penjualan->is_return == 0){?>
+							<?php if($penjualan->is_return == 0 || $penjualan->is_return == ""){?>
 								<a href="<?php echo site_url('retur_purchase/edit').'/'.$penjualan->id;?>" class="btn btn-xs btn-primary">Edit</a>
 							<?php }else{ ?>
 								<span class="btn-xs btn-success">Complete</span>		
