@@ -34,7 +34,7 @@
                       <input type="text" class="form-control" name="id" value="<?php echo !empty($_GET['id']) ? $_GET['id'] : '';?>"/>
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Date From</label>
                       <div class="input-group date">
@@ -42,7 +42,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Date End</label>
                       <div class="input-group date">
@@ -50,16 +50,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
                       <input type="submit" value="Cari" class="form-control btn btn-primary">
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label for="submit">&nbsp</label>
-                      <a href="<?php echo site_url('penjualan/export_csv').get_uri();?>" class="form-control btn btn-default"><i class="fa fa-file-excel-o"></i> Export Excel</a>
                     </div>
                   </div>
                 </div>

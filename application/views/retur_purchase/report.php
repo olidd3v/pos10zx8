@@ -27,13 +27,13 @@
               <form action="<?php echo site_url('retur_purchase/report?search=true');?>" method="GET">
                 <input type="hidden" class="form-control" name="search" value="true"/>
                 <div class="box-body pad">
-                  <div class="col-md-2">
+                  <!-- <div class="col-md-2">
                     <div class="form-group">
                       <label for="id">Kode Purchase</label>
                       <input type="text" class="form-control" name="id" value="<?php echo !empty($_GET['id']) ? $_GET['id'] : '';?>"/>
                     </div>
-                  </div>
-                  <div class="col-md-2">
+                  </div> -->
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Date From</label>
                       <div class="input-group date">
@@ -41,7 +41,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Date End</label>
                       <div class="input-group date">
@@ -49,20 +49,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
                       <input type="submit" value="Cari" class="form-control btn btn-primary">
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label for="submit">&nbsp</label>
-                      <a href="<?php echo site_url('retur_purchase/export_csv');?>" class="form-control btn btn-default"><i class="fa fa-file-excel-o"></i> Export Excel</a>
-                    </div>
-                  </div>
                   </form>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
                       <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div>

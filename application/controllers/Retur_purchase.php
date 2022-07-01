@@ -292,7 +292,7 @@ class Retur_purchase extends MY_Controller {
 
 		$carts =  $this->cart->contents();
 		$is_return = escape($this->input->post("is_return"));
-		$return_by = escape($this->input->post("return_by"));
+		// $return_by = escape($this->input->post("return_by"));
 		$check_qty = $this->_check_qty($carts);
 		if(!empty($carts) && is_array($carts) && $check_qty){
 			// Delete Row on sales_data table
@@ -308,7 +308,7 @@ class Retur_purchase extends MY_Controller {
 			$data['total_price'] = $this->cart->total();
 			$data['total_item'] = $this->cart->total_items();
 			$data['is_return'] = ($is_return != "undefined") ? (int)$is_return : "0";
-			$data['return_by'] = ($return_by != "undefined") ? (int)$return_by : "0";
+			// $data['return_by'] = ($return_by != "undefined") ? (int)$return_by : "0";
 
 			$is_return_old = $details[0]->is_return;
 			if($is_return == 1 && $is_return_old != 1 && strpos($details[0]->sales_retur_id, "RETS") !== false && $return_by == 1){
