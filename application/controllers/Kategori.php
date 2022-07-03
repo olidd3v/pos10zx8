@@ -95,7 +95,7 @@ class Kategori extends MY_Controller {
         if($check_id){
             $this->kategori_model->delete($id);
         }
-        redirect(site_url('pelanggan'));
+        redirect(site_url('kategori'));
     }
     public function export_csv(){
         $filter = false;
