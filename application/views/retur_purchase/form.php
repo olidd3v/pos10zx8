@@ -44,16 +44,16 @@
                       <input type="hidden" name="retur_id" id="retur_id" value="<?php echo !empty($code_retur_penjualan) ? $code_retur_penjualan : '';?>"/>
                     </div>
                   </div>
-                  <div class="form-group">
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Kode Purchase TRX</label>
                      <div class="col-sm-8">
                        <input type="text" name="id" value="<?php echo !empty($code_penjualan) ? $code_penjualan : '';?>" class="form-control" disabled/>
                        <input type="hidden" name="retur_code" id="retur_code" value="<?php echo !empty($code_penjualan) ? $code_penjualan : '';?>"/>
                      </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
+                  <div class="form-group" style="display: none;">
                     <label class="col-sm-4 control-label" for="date">Tanggal</label>
                     <div class="col-sm-8">
                       <input type="text" value="<?php echo !empty($date) ? $date : date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>

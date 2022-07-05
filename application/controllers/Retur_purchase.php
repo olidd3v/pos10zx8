@@ -101,9 +101,11 @@ class Retur_purchase extends MY_Controller {
 	}
 
 	public function print_now($id = ""){
+		$datax = $this->setting_model->get_by_id(1);
 		$details = $this->retur_purchase->get_detail_by_id($id);
 		if($details){
 			$data['details'] = $details;
+			$data['toko'] = $datax;
 			$this->load->view("retur_purchase/print",$data);
 		}else{
 			redirect(site_url('retur_purchase?page'));

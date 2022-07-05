@@ -66,11 +66,13 @@ class User extends MY_Controller {
 
     public function save($id = ''){
         $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('role', 'Role', 'required');
 
         $data['username'] = escape($this->input->post('username'));
+        $data['name'] = escape($this->input->post('name'));
         $data['email'] = escape($this->input->post('email'));
         $data['password'] = md5(escape($this->input->post("password")));
         $data['role'] = escape($this->input->post('role'));

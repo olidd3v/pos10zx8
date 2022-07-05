@@ -43,7 +43,7 @@
                                         <td><?php echo $details[0]->supplier_name;?></td>
                                         <td><?php echo $details[0]->total_item;?></td>
                                         <td>Rp<?php echo number_format($details[0]->total_price);?></td>
-                                        <td><?php echo $details[0]->date;?></td>
+                                        <td><?php echo $details[0]->tgl;?></td>
                                     </tr>
                                 </tbody>
                             </table>

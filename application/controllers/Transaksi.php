@@ -279,9 +279,11 @@ class Transaksi extends MY_Controller {
 		return $result;
 	}
 	public function print_now($id = ""){
+		$datax = $this->setting_model->get_by_id(1);
 		$details = $this->transaksi_model->get_detail($id);
 		if($details){
 			$data['details'] = $details;
+			$data['toko'] = $datax;
 			$this->load->view("transaksi/print",$data);
 		}else{
 			redirect(site_url('transaksi'));

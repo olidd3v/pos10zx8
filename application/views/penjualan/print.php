@@ -79,12 +79,12 @@
                     <td> : </td>
                     <td valign="top"><?php echo $details[0]->is_cash == 1 ? "Cash" : "Credit";?></td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <td style="width: 100%;">Petugas</td>
                     <td></td>
                     <td> : </td>
-                    <td valign="top"><?php echo $this->username;?></td>
-                </tr> -->
+                    <td valign="top"><?php print_r($prof[0]->name);?>/<?php if ($prof[0]->role == 0) { echo "Kasir";} elseif ($prof[0]->role == 1) { echo "Pemilik";}?></td>
+                </tr>
             </thead>
         </table>
         <br />

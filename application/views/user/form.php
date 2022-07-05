@@ -43,6 +43,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="col-sm-4 control-label" for="name">Name</label>
+                    <div class="col-sm-8">
+                      <input type="text" value="<?php echo !empty($user) ? $user['name'] : '';?>" name="name" placeholder="Name" id="name" class="form-control" required autocomplete="off"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="col-sm-4 control-label" for="email">Email</label>
                     <div class="col-sm-8">
                       <input type="email" value="<?php echo !empty($user) ? $user['email'] : '';?>" name="email" placeholder="email" id="email" class="form-control" required autocomplete="off"/>
@@ -51,7 +57,7 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="password">Password</label>
                     <div class="col-sm-8">
-                      <input type="password" value="<?php echo !empty($user) ? $user['password'] : '';?>" name="password" placeholder="Password" id="password" class="form-control" required autocomplete="new-password"/>
+                      <input type="password" name="password" placeholder="Password" id="password" class="form-control" required autocomplete="new-password"/>
                     </div>
                   </div>
                 </div>

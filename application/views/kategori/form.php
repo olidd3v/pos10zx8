@@ -35,14 +35,7 @@
             <form class="form-horizontal" method="POST" action="<?php echo site_url('kategori/save');?>">
             <?php } ?>
               <div class="box-body">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="col-sm-4 control-label" for="kode">Kode Kategori</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="category_id" value="<?php echo !empty($kategori) ? $kategori['id'] : '';?>" id="kode_kategori" class="form-control" autocomplete="off" required/>
-                      <span class="help-inline label label-danger" id="status_kode"></span>
-                    </div>
-                  </div>
+                <div class="col-md-6">                  
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="name">Nama Kategori</label>
                     <div class="col-sm-8">
@@ -57,7 +50,14 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="kode">Kode Kategori</label>
+                    <div class="col-sm-8">
+                      <input type="text" value="<?php echo !empty($kategori) ? $kategori['id'] : $code_category;?>" name="category_id" id="category_id" class="form-control" disabled/>
+                      <input type="hidden" name="category_id" value="<?php echo !empty($kategori) ? $kategori['id'] : $code_category;?>" id="category_id" class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="form-group" style="display: none;">
                     <label class="col-sm-4 control-label" for="date">Tanggal</label>
                     <div class="col-sm-8">
                       <input type="text" value="<?php echo !empty($kategori) ? $kategori['date'] : date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>

@@ -39,6 +39,14 @@ class Kategori extends MY_Controller {
 
     public function create(){
         $data['judul_app'] = $this->setting_model->get_by_id(1);
+
+        $code_category = $this->kategori_model->get_last_id();
+		if($code_category){
+			$id = $code_category[0]->id;
+			$data['code_category'] = generate_code('KAT',$id);
+		}else{
+			$data['code_category'] = 'KAT001';
+		}
         $this->load->view('kategori/form', $data);
     }
 

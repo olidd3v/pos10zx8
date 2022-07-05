@@ -51,19 +51,19 @@
         <table style="display:inline;">
             <thead>
                 <tr>
-                    <td style="width:350px;">Transaksi ID:</td>
+                    <td style="width:350px;"><?php echo $toko[0]['judul_app'];?></td>
                     <td style="width:200px;">Kode Transaksi</td>
                     <td style="width:200px;">: <?php echo $details[0]->id;?></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo $details[0]->id;?></td>
+                    <td style="width:350px;"><?php echo $toko[0]['alamat'];?></td>
                     <td>Tgl Pembelian</td>
                     <td>: <?php echo date("d-m-Y H:i:s",strtotime($details[0]->date));?></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td style="width:350px;">Transaksi ID: <?php echo $details[0]->id; ?></td>
                     <td valign="top">Return By</td>
                     <td valign="top">: Barang</td>
                 </tr>

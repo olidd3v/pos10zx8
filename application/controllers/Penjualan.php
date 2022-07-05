@@ -291,9 +291,11 @@ class Penjualan extends MY_Controller {
 		$details = $this->penjualan_model->get_detail($id);
 		$data['judul_app'] = $this->setting_model->get_by_id(1);
 		$res = $this->trans_model->get_by_id($id);
+		$prof = $this->auth_model->prof();
 		if($details){
 			$data['details'] = $details;
 			$data['res'] = $res;
+			$data['prof'] = $prof;
 			$this->load->view("penjualan/print",$data);
 		}else{
 			redirect(site_url('penjualan?page'));

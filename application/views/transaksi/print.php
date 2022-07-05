@@ -52,19 +52,19 @@
         <table style="display:inline;">
             <thead>
                 <tr>
-                    <td style="width:350px;">Supplier: <?php echo $details[0]->supplier_name;?></td>
+                    <td style="width:350px;"><?php echo $toko[0]['judul_app'];?></td>
                     <td style="width:200px;">Kode Transaksi</td>
                     <td style="width:200px;">: <?php echo $details[0]->id;?></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td></td>
+                    <td style="width:350px;"><?php echo $toko[0]['alamat'];?></td>
                     <td>Tgl Transaksi</td>
-                    <td>: <?php echo date("d-m-Y H:i:s",strtotime($details[0]->date));?></td>
+                    <td>: <?php echo date("d-m-Y H:i:s",strtotime($details[0]->tgl));?></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td style="width:350px;">Supplier: <?php echo $details[0]->supplier_name;?></td>
                     <td></td>
                     <td></td>
                 </tr>

@@ -54,7 +54,7 @@ class Transaksi_model extends CI_Model {
 		$this->db->delete($this->table, array('id' => $id));
 	}
 	public function get_detail($id,$array = false){
-		$this->db->select('*,purchase_transaction.id AS id, product.id as product_id ');
+		$this->db->select('*,purchase_transaction.id AS id, product.id as product_id, purchase_transaction.date as tgl ');
 		$this->db->from('purchase_data');
 		$this->db->join('purchase_transaction', 'purchase_data.transaction_id = purchase_transaction.id','right');
 		$this->db->join('product', 'product.id = purchase_data.product_id', 'left');

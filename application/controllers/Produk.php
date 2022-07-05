@@ -38,6 +38,13 @@ class Produk extends MY_Controller {
     public function create(){
         $data['judul_app'] = $this->setting_model->get_by_id(1);
         $data['category'] = $this->kategori_model->get_all();
+        $kode_produk = $this->produk_model->get_last_id();
+		if($kode_produk){
+			$id = $kode_produk[0]->id;
+			$data['kode_produk'] = generate_code('PDC',$id);
+		}else{
+			$data['kode_produk'] = 'PDC001';
+		}
         $this->load->view('produk/form',$data);
     }
 

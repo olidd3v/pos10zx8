@@ -40,6 +40,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Username</th>
+                                    <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Action</th>
@@ -51,6 +52,7 @@
                                         <tr>
                                             <td><?php echo $user->id;?></td>
                                             <td><?php echo $user->username;?></td>
+                                            <td><?php echo $user->name;?></td>
                                             <td><?php echo $user->email;?></td>
                                             <td><?php echo $user->role;?></td>
                                             <td>
