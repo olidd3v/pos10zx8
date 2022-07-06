@@ -67,6 +67,32 @@ class Transaksi extends MY_Controller {
 		$data['paggination'] = get_paggination($total_row,get_search());
 		$this->load->view('transaksi/report',$data);
 	}
+
+	function print_report(){
+		$app = $this->setting_model->get_by_id(1);
+		$data['app'] = $app;
+		if(isset($_GET['search'])){
+			$filter = array();
+			if(!empty($_GET['id']) && $_GET['id'] != ''){
+				$filter['purchase_transaction.id LIKE'] = "%".$_GET['id']."%";
+			}
+			if(!empty($_GET['date_from']) && $_GET['date_from'] != ''){
+				$filter['DATE(purchase_transaction.date) >='] = $_GET['date_from'];
+			}
+
+			if(!empty($_GET['date_end']) && $_GET['date_end'] != ''){
+				$filter['DATE(purchase_transaction.date) <='] = $_GET['date_end'];
+			}
+
+			$total_row = $this->transaksi_model->count_total_filter($filter);
+			$data['transaksis'] = $this->transaksi_model->get_filter($filter,url_param());
+		}else{
+			$total_row = $this->transaksi_model->count_total();
+			$data['transaksis'] = $this->transaksi_model->get_all(url_param());
+		}
+		$data['paggination'] = get_paggination($total_row,get_search());
+		$this->load->view('transaksi/print_report',$data);
+	}
 	
 	function create(){
 		// destry cart
@@ -75,6 +101,7 @@ class Transaksi extends MY_Controller {
 		$data['suppliers'] = $this->supplier_model->get_all();
 		$data['kategoris'] = $this->kategori_model->get_all();
 		$data['produks'] = $this->produk_model->get_all();
+		$data['code_pembelian'] = "INP".strtotime(date("Y-m-d H:i:s"));
 		$this->load->view('transaksi/form',$data);
 	}
 	

@@ -16,7 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation"><a href="<?php echo site_url('retur_purchase/create');?>">Input Retur Purchase</a></li>
             <li role="presentation"><a href="<?php echo site_url('retur_purchase');?>">List Retur Purchase</a></li>
-            <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase/report');?>">Report Retur Purchase</a></li>
+            <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase/report?search=true&date_from=&date_end=');?>">Report Retur Purchase</a></li>
           </ul>
           <div class="box">
             <div class="box-header">
@@ -59,7 +59,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
-                      <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div>
+                      <a href="<?php echo site_url('retur_purchase/print_report/')."?search=true&date_from=".$_GET['date_from']."&date_end=".$_GET['date_end'];?>" class="form-control btn btn-success btnPrint"><i class="fa fa-print"></i> Print</a>
+                      <!-- <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div> -->
                     </div>
                   </div>
                 </div>
@@ -68,7 +69,9 @@
                 <tr>
                   <th>Retur ID</th>
                   <th>Sales Retur ID</th>
+                  <th>Product Name</th>
                   <th>Total Item</th>
+                  <th>Harga Satuan</th>
                   <th>Total Harga</th>
                   <th>Pengembalian Barang</th>
                   <th>Date</th>
@@ -82,9 +85,12 @@
                   <td>
                   <?php echo $penjualan->sales_retur_id;?>
                   </td>
-                  <td id="item"><?php echo $penjualan->total_item;?></td>
-                  <td id="item_2" style="display: none;"><?php echo $penjualan->total_price;?></td>
-                  <td>Rp<?php echo number_format($penjualan->total_price);?></td>
+                  <td><?php echo $penjualan->product_name;?></td>
+                  <td id="item"><?php echo $penjualan->quantity;?></td>
+                  <td id="item_2" style="display: none;"><?php echo $penjualan->price_item;?></td>
+                  <td>Rp<?php echo number_format($penjualan->price_item);?></td>
+                  <td id="item_3" style="display: none;"><?php echo $penjualan->subtotal;?></td>
+                  <td>Rp<?php echo number_format($penjualan->subtotal);?></td>
                   <td><?php echo $penjualan->is_return == 1 ? "Complete" : "Not Complete";?></td>
                   <td><?php echo $penjualan->date;?></td>
                 </tr>
@@ -93,9 +99,10 @@
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="2">Total</th>
+                  <th colspan="3">Total</th>
                   <th id="total"></th>
-                  <th id="harga" coslpa="2"></th>
+                  <th id="harga"></th>
+                  <th id="hargax" coslpan="2"></th>
                 </tr>
                 </tfoot>
               </table>
@@ -153,6 +160,7 @@
        function setup(){
         var TotalValue = 0;
         var TotalValuer = 0;
+        var TotalValuerx = 0;
 
         $("tr #item").each(function(index,value){
           currentRow = parseFloat($(this).text());
@@ -173,6 +181,19 @@
           ribuan	= ribuan.join(',').split('').reverse().join('');
         
         document.getElementById('harga').innerHTML = 'Rp' + ribuan;
+
+        $("tr #item_3").each(function(index,value){
+          currentRow = parseFloat($(this).text());
+          TotalValuerx += currentRow
+        });
+
+        // document.getElementById('harga').innerHTML = TotalValuer;
+
+        var	reverse = TotalValuerx.toString().split('').reverse().join(''),
+          ribuanx 	= reverse.match(/\d{1,3}/g);
+          ribuanx	= ribuanx.join(',').split('').reverse().join('');
+        
+        document.getElementById('hargax').innerHTML = 'Rp' + ribuanx;
         }
     </script>
 <?php $this->load->view('element/footer');?>

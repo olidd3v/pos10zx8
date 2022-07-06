@@ -17,7 +17,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase/create');?>">Input Retur Purchase</a></li>
             <li role="presentation"><a href="<?php echo site_url('retur_purchase');?>">List Retur Purchase</a></li>
-            <li role="presentation"><a href="<?php echo site_url('retur_purchase/report');?>">Report Retur Purchase</a></li>
+            <li role="presentation"><a href="<?php echo site_url('retur_purchase/report?search=true&date_from=&date_end=');?>">Report Retur Purchase</a></li>
           </ul>
 		  <div class="box box-info">
             <div class="box-header with-border">
@@ -99,7 +99,7 @@
                               <tr id="<?php echo $k;?>" class="cart-value">
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
-                                <td><input type="number" id="t-ret" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
+                                <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
@@ -136,7 +136,7 @@
   <!-- /.content-wrapper -->
   <script>
         function runx(){
-          var con = document.getElementById("t-ret").value;
+          var con = document.getElementById("jml_qty").value;
           var btn = document.getElementById("submit-transaksi");
 
           if (con > <?php echo $details[0]->total_item;?> ) {

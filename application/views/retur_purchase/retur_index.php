@@ -16,7 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase/create');?>">Input Retur Purchase</a></li>
             <li role="presentation"><a href="<?php echo site_url('retur_purchase');?>">List Retur Purchase</a></li>
-            <li role="presentation"><a href="<?php echo site_url('retur_purchase/report');?>">Report Retur Purchase</a></li>
+            <li role="presentation"><a href="<?php echo site_url('retur_purchase/report?search=true&date_from=&date_end=');?>">Report Retur Purchase</a></li>
           </ul>
           <div class="box">
             <div class="box-header">

@@ -59,7 +59,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
-                      <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div>
+                      <a href="<?php echo site_url('penjualan/print_report/')."?search=true&date_from=".$_GET['date_from']."&date_end=".$_GET['date_end'];?>" class="form-control btn btn-success btnPrint"><i class="fa fa-print"></i> Print</a>
+                      <!-- <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div> -->
                     </div>
                   </div>
                 </div>
@@ -67,9 +68,11 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead style="text-align: left;">
                 <tr>
-                  <th>Transaksi ID</th>
+                <th>penjualan ID</th>
                   <th>Customer Name</th>
+                  <th>Nama Barang</th>
                   <th>Total Item</th>
+                  <th>Harga Satuan</th>
                   <th>Total Harga</th>
                   <th>Metode Pembayaran</th>
                   <th>Date</th>
@@ -81,10 +84,13 @@
                     <tr>
                       <td><?php echo $penjualan->id;?></td>
                       <td><?php echo $penjualan->customer_id;?></td>
-                      <td id="item"><?php echo $penjualan->total_item;?></td>
-                      <td>Rp<?php echo number_format($penjualan->total_price);?></td>
-                      <td style="display: none;" id="item_2"><?php echo $penjualan->total_price;?></td>
-                      <td><?php echo $penjualan->is_cash == 1 ? "<span class='label label-success'>Cash</span>" : "<span class='label label-warning'>Debit</span>";?></td>
+                      <td><?php echo $penjualan->product_name;?></td>
+                      <td id="item"><?php echo $penjualan->quantity;?></td>
+                      <td>Rp<?php echo number_format($penjualan->price_item);?></td>
+                      <td>Rp<?php echo number_format($penjualan->subtotal);?></td>
+                      <td style="display: none;" id="item_2"><?php echo $penjualan->subtotal;?></td>
+                      <td style="display: none;" id="item_3"><?php echo $penjualan->price_item;?></td>
+                      <td><?php echo $penjualan->is_cash == 1 ? "<span class='label label-success'>Cash</span>" : "<span class='label label-primary'>Debit</span>";?></td>
                       <td><?php echo $penjualan->date;?></td>
                     </tr>
                   <?php } ?>
@@ -92,9 +98,10 @@
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="2">Total</th>
-                  <th id="total"></th>
-                  <th colspan="3" id="harga"></th>
+                  <th colspan="3" style="border-top: 1px solid #000;">Total</th>
+                  <th id="total" style="border-top: 1px solid #000;"></th>
+                  <th style="border-top: 1px solid #000;" id="harga_satuan"></th>
+                  <th colspan="3" id="harga" style="border-top: 1px solid #000;"></th>
                 </tr>
                 </tfoot>
               </table>
@@ -152,6 +159,8 @@
        function setup(){
         var TotalValue = 0;
         var TotalValuer = 0;
+        var TotalValuerx = 0;
+        
 
         $("tr #item").each(function(index,value){
           currentRow = parseFloat($(this).text());
@@ -172,6 +181,17 @@
           ribuan	= ribuan.join(',').split('').reverse().join('');
         
         document.getElementById('harga').innerHTML = 'Rp' + ribuan;
+
+        $("tr #item_3").each(function(index,value){
+          currentRow = parseFloat($(this).text());
+          TotalValuerx += currentRow
+        });
+
+        var	reverse = TotalValuerx.toString().split('').reverse().join(''),
+          ribuanx 	= reverse.match(/\d{1,3}/g);
+          ribuanx	= ribuanx.join(',').split('').reverse().join('');
+        
+        document.getElementById('harga_satuan').innerHTML = 'Rp' + ribuanx;
         }
     </script>
 <?php $this->load->view('element/footer');?>

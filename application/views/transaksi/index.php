@@ -16,7 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation"><a href="<?php echo site_url('transaksi/create');?>">Input Transaksi</a></li>
             <li role="presentation" class="active"><a href="<?php echo site_url('transaksi');?>">List Transaksi</a></li>
-            <li role="presentation"><a href="<?php echo site_url('transaksi/report');?>">Report Transaksi</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
           <div class="box">
             <div class="box-header">

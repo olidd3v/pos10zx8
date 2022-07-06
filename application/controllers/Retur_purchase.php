@@ -64,13 +64,40 @@ class Retur_purchase extends MY_Controller {
 			}
 
 			$total_row = $this->retur_purchase->count_total_filter($filter);
-			$data['penjualans'] = $this->retur_purchase->get_filter($filter,url_param());
+			$data['penjualans'] = $this->retur_purchase->get_filter_newx($filter,url_param());
 		}else{
 			$total_row = $this->retur_purchase->count_total();
 			$data['penjualans'] = $this->retur_purchase->get_all(url_param());
 		}
 		$data['paggination'] = get_paggination($total_row,get_search());
 		$this->load->view('retur_purchase/report',$data);
+	}
+	
+	function print_report(){
+		$app = $this->setting_model->get_by_id(1);
+		$data['app'] = $app;
+		if(isset($_GET['search'])){
+			$filter = array();
+			if(!empty($_GET['id']) && $_GET['id'] != ''){
+				$filter['purchase_retur.id LIKE'] = "%".$_GET['id']."%";
+			}
+
+			if(!empty($_GET['date_from']) && $_GET['date_from'] != ''){
+				$filter['DATE(purchase_retur.date) >='] = $_GET['date_from'];
+			}
+
+			if(!empty($_GET['date_end']) && $_GET['date_end'] != ''){
+				$filter['DATE(purchase_retur.date) <='] = $_GET['date_end'];
+			}
+
+			$total_row = $this->retur_purchase->count_total_filter($filter);
+			$data['penjualans'] = $this->retur_purchase->get_filter_newx($filter,url_param());
+		}else{
+			$total_row = $this->retur_purchase->count_total();
+			$data['penjualans'] = $this->retur_purchase->get_all(url_param());
+		}
+		$data['paggination'] = get_paggination($total_row,get_search());
+		$this->load->view('retur_purchase/print_report',$data);
 	}
 	
 	function create(){
@@ -249,6 +276,7 @@ class Retur_purchase extends MY_Controller {
 			$data['date'] = escape($this->input->post('retur_date'));
 
 			$this->retur_purchase->insert($data);
+			// $this->produk_model->update_qty_plus_retur();
 			if($data['id']){
 				$this->_insert_purchase_data($data['id'],$carts);
 			}

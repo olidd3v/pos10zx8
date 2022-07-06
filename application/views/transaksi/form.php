@@ -21,7 +21,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="<?php echo site_url('transaksi/create');?>">Input Transaki</a></li>
             <li role="presentation"><a href="<?php echo site_url('transaksi');?>">List Transaki</a></li>
-            <li role="presentation"><a href="<?php echo site_url('transaksi/report');?>">Report Transaki</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
 		  <div class="box box-info">
             <div class="box-header with-border">
@@ -44,7 +44,8 @@
                   <div class="form-group">
                     <label class="col-sm-4 control-label" for="kode">Kode Transaksi</label>
                     <div class="col-sm-8">
-                      <input data-attr="" type="text" name="transaction_id" data-origin="<?php echo !empty($transaksi) ? $transaksi[0]->id : '';?>" value="<?php echo !empty($transaksi) ? $transaksi[0]->id : '';?>" id="kode_transaksi" class="form-control" required/>
+                      <input data-attr="" type="text" name="transaction_id" data-origin="<?php echo !empty($code_pembelian) ? $code_pembelian : '';?>" value="<?php echo !empty($code_pembelian) ? $code_pembelian : '';?>" id="kode_transaksi" class="form-control" disabled/>
+                      <input data-attr="" type="hidden" name="transaction_id" data-origin="<?php echo !empty($code_pembelian) ? $code_pembelian : '';?>" value="<?php echo !empty($code_pembelian) ? $code_pembelian : '';?>" id="kode_transaksi" class="form-control" required/>
                       <span class="help-inline label label-danger" id="status_kode"></span>
                     </div>
                   </div>

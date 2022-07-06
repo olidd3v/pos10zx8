@@ -59,7 +59,7 @@
           <ul class="treeview-menu"> 
 			<li class="<?php echo is_menu('transaksi');?>"><a href="<?php echo site_url('transaksi');?>"><i class="fa fa-area-chart" aria-hidden="true"></i> <span>List Transaksi</span></a></li>
 			<li class="<?php echo is_menu('transaksi','create');?>"><a href="<?php echo site_url('transaksi/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Transaction</span></a></li>
-			<li class="<?php echo is_menu('transaksi','report');?>"><a href="<?php echo site_url('transaksi/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Transaction</span></a></li>
+			<li class="<?php echo is_menu('transaksi','report');?>"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Transaction</span></a></li>
           </ul>
         </li>
         <li class="treeview <?php echo is_menu('penjualan');?>">
@@ -75,7 +75,7 @@
           <ul class="treeview-menu">
             <li class="<?php echo is_menu('retur_purchase');?>"><a href="<?php echo site_url('retur_purchase');?>"><i class="fa fa-share" aria-hidden="true"></i> <span>List Retur Purchase</span></a></li>
             <li class="<?php echo is_menu('retur_purchase','create');?>"><a href="<?php echo site_url('retur_purchase/create');?>"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <span>Add Retur Purchase</span></a></li>
-			      <li class="<?php echo is_menu('retur_purchase','report');?>"><a href="<?php echo site_url('retur_purchase/report');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Retur Purchase</span></a></li>
+			      <li class="<?php echo is_menu('retur_purchase','report');?>"><a href="<?php echo site_url('retur_purchase/report?search=true&date_from=&date_end=');?>"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Report Retur Purchase</span></a></li>
           </ul>
         </li>
         <li class="treeview <?php echo is_menu('user');?>">

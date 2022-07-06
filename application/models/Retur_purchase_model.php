@@ -90,7 +90,22 @@ class Retur_purchase_model extends CI_Model {
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+
+	public function get_filter_newx($filter = '',$limit_offset = array(),$is_array = false){
+		$sql = "SELECT *, purchase_retur.id as id, purchase_retur.date as date FROM purchase_data
+						JOIN purchase_retur ON purchase_data.transaction_id = purchase_retur.sales_retur_id
+						JOIN product ON purchase_data.product_id = product.id
+		"; 
+		$query = $this->db->query($sql);
+		if ($is_array){
+			return $query->result_array();
+		}else{
+			return $query->result();
+		}
+	}
+
 	public function get_filter($filter = '',$limit_offset = array(),$is_array = false){
+		
 		$this->db->select($this->select_default);
 		$this->db->order_by("date", "desc");
 		if(!empty($filter)){

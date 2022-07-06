@@ -102,6 +102,12 @@ class Produk_model extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update('product');
 	}
+	public function update_qty_plus_retur(){
+		$this->db->set('product_qty', 'product_qty+4', FALSE);
+		// $this->db->set('product_qty', 'product_qty+'.$data['total_item'], FALSE);
+		$this->db->where('id', 'PDC001');
+		$this->db->update('product');
+	}
 	public function process_qty($transaction = array()){
 		$data = '';
 		foreach($transaction as $k => $item){

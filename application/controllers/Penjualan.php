@@ -7,6 +7,7 @@ class Penjualan extends MY_Controller {
 		$this->load->model('auth_model');
         $this->load->library('form_validation');
 		$this->load->model('penjualan_model');
+		$this->load->model('penjualannew_model');
 		$this->load->model('kategori_model');
 		$this->load->model('produk_model');
 		$this->load->model('setting_model');
@@ -49,25 +50,52 @@ class Penjualan extends MY_Controller {
 		if(isset($_GET['search'])){
 			$filter = array();
 			if(!empty($_GET['id']) && $_GET['id'] != ''){
-				$filter['sales_transaction.id LIKE'] = "%".$_GET['id']."%";
+				$filter['sales_data.id LIKE'] = "%".$_GET['id']."%";
 			}
 
 			if(!empty($_GET['date_from']) && $_GET['date_from'] != ''){
-				$filter['DATE(sales_transaction.date) >='] = $_GET['date_from'];
+				$filter['DATE(sales_data.date) >='] = $_GET['date_from'];
 			}
 
 			if(!empty($_GET['date_end']) && $_GET['date_end'] != ''){
-				$filter['DATE(sales_transaction.date) <='] = $_GET['date_end'];
+				$filter['DATE(sales_data.date) <='] = $_GET['date_end'];
 			}
 
-			$total_row = $this->penjualan_model->count_total_filter($filter);
-			$data['penjualans'] = $this->penjualan_model->get_filter($filter,url_param());
+			$total_row = $this->penjualannew_model->count_total_filter($filter);
+			$data['penjualans'] = $this->penjualannew_model->get_filter($filter,url_param());
 		}else{
-			$total_row = $this->penjualan_model->count_total();
-			$data['penjualans'] = $this->penjualan_model->get_all(url_param());
+			$total_row = $this->penjualannew_model->count_total();
+			$data['penjualans'] = $this->penjualannew_model->get_all(url_param());
 		}
 		$data['paggination'] = get_paggination($total_row,get_search());
 		$this->load->view('penjualan/report',$data);
+	}
+
+	function print_report(){
+		$app = $this->setting_model->get_by_id(1);
+		$data['app'] = $app;
+		if(isset($_GET['search'])){
+			$filter = array();
+			if(!empty($_GET['id']) && $_GET['id'] != ''){
+				$filter['sales_data.id LIKE'] = "%".$_GET['id']."%";
+			}
+
+			if(!empty($_GET['date_from']) && $_GET['date_from'] != ''){
+				$filter['DATE(sales_data.date) >='] = $_GET['date_from'];
+			}
+
+			if(!empty($_GET['date_end']) && $_GET['date_end'] != ''){
+				$filter['DATE(sales_data.date) <='] = $_GET['date_end'];
+			}
+
+			$total_row = $this->penjualannew_model->count_total_filter($filter);
+			$data['penjualans'] = $this->penjualannew_model->get_filter_c($filter,url_param());
+		}else{
+			$total_row = $this->penjualannew_model->count_total();
+			$data['penjualans'] = $this->penjualannew_model->get_all(url_param());
+		}
+		$data['paggination'] = get_paggination($total_row,get_search());
+		$this->load->view('penjualan/print_report',$data);
 	}
 	
 	function create(){

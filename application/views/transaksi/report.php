@@ -16,7 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation"><a href="<?php echo site_url('transaksi/create');?>">Input Transaksi</a></li>
             <li role="presentation"><a href="<?php echo site_url('transaksi');?>">List Transaksi</a></li>
-            <li role="presentation" class="active"><a href="<?php echo site_url('transaksi/report');?>">Report Transaksi</a></li>
+            <li role="presentation" class="active"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
           <div class="box">
             <div class="box-header">
@@ -52,7 +52,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="submit">&nbsp</label>
-                      <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div>
+                      <a href="<?php echo site_url('transaksi/print_report/')."?search=true&date_from=".$_GET['date_from']."&date_end=".$_GET['date_end'];?>" class="form-control btn btn-success btnPrint"><i class="fa fa-print"></i> Print</a>
+                      <!-- <div id="print" class="form-control btn btn-success" onclick="printData();"><i class="fa fa-print"></i> Print </div> -->
                     </div>
                   </div>
                 </div>
@@ -60,20 +61,24 @@
               <table id="example1" class="table table-bordered table-striped">
               <thead style="text-align: left;">
                 <tr>
+                  <th style="width: 50px;">No</th>
                   <th>Transaksi ID</th>
                   <th>Supplier Name</th>
+                  <th>Nama Barang</th>
                   <th>Total Item</th>
                   <th>Total Harga</th>
                   <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if(isset($transaksis) && is_array($transaksis)){ ?>
+                <?php $no = 1; if(isset($transaksis) && is_array($transaksis)){ ?>
                   <?php foreach($transaksis as $transaksi){?>
                     <tr>
+                      <td><?php $no <= count($transaksis); echo $no++; ?></td>
                       <td><?php echo $transaksi->id;?></td>
                       <td><?php echo $transaksi->supplier_name;?></td>
-                      <td id="item"><?php echo $transaksi->total_item;?></td>
+                      <td><?php echo $transaksi->product_name;?></td>
+                      <td id="item"><?php echo $transaksi->quantity;?></td>
                       <td>Rp<?php echo number_format($transaksi->total_price);?></td>
                       <td id="item_2" style="display: none;"><?php echo $transaksi->total_price;?></td>
                       <td><?php echo $transaksi->date;?></td>
@@ -83,9 +88,9 @@
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="2">Total</th>
+                  <th colspan="4">Total</th>
                   <th id="total"></th>
-                  <th id="harga"></th>
+                  <th colspan="2" id="harga"></th>
                 </tr>
                 </tfoot>
               </table>
@@ -111,7 +116,7 @@
       newWin.document.write("<div style='margin-bottom: 10px; text-align: center;'> <h1> Laporan Penjualan Barang</h1><h3><?php echo $_GET['date_from'].' - '.$_GET['date_end']; ?></h3><hr></div>");
       newWin.document.write(divToPrint.outerHTML);
       var css =`table, tfoot, td, th {
-          border: 1px solid #000;
+          // border: 1px solid #000;
           text-align:left;
           padding: 0px 5px;
           width: 100%;
@@ -120,6 +125,7 @@
       html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
 
       tfoot {
+        border-top: 1px solid #000;
           height: 30px;
       }
 
