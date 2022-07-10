@@ -82,7 +82,7 @@
                           <td style="display: none;">Kategori</td>
                           <td>Nama Barang</td>
                           <td>Jumlah</td>
-                          <td>Harga Beli Satuan</td>
+                          <td style="display: none;">Harga Beli Satuan</td>
                           <td style="display: none;">Disc 1</td>
                           <td style="display: none;">Disc 2</td>
                           <td style="display: none;">Disc 3</td>
@@ -123,8 +123,8 @@
                           <td>
                             <input type="number" id="jumlah" class="form-control" name="jumlah" min="1" value="1"/>
                           </td>
-                          <td>
-                            <input type="text" class="form-control form-price-format discount-trx" data-attr="0" id="sale_price" name="sale_price" placeholder="Harga" required/>
+                          <td style="display: none;">
+                            <input type="hidden" value="0" class="form-control form-price-format discount-trx" data-attr="0" id="sale_price" name="sale_price" placeholder="Harga" required/>
                           </td>
 
                           <td style="display: none;">

@@ -68,13 +68,13 @@
               <thead style="text-align: left;">
                 <tr>
                   <th>Retur ID</th>
+                  <th>Date</th>
                   <th>Sales Retur ID</th>
                   <th>Product Name</th>
                   <th>Total Item</th>
                   <th>Harga Satuan</th>
                   <th>Total Harga</th>
                   <th>Pengembalian Barang</th>
-                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,6 +82,7 @@
                   <?php foreach($penjualans as $penjualan){?>
                 <tr>
                   <td><?php echo $penjualan->id;?></td>
+                  <td><?php echo $penjualan->date;?></td>
                   <td>
                   <?php echo $penjualan->sales_retur_id;?>
                   </td>
@@ -92,14 +93,13 @@
                   <td id="item_3" style="display: none;"><?php echo $penjualan->subtotal;?></td>
                   <td>Rp<?php echo number_format($penjualan->subtotal);?></td>
                   <td><?php echo $penjualan->is_return == 1 ? "Complete" : "Not Complete";?></td>
-                  <td><?php echo $penjualan->date;?></td>
                 </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="3">Total</th>
+                  <th colspan="4">Total</th>
                   <th id="total"></th>
                   <th id="harga"></th>
                   <th id="hargax" coslpan="2"></th>

@@ -62,12 +62,12 @@
               <thead style="text-align: left;">
                 <tr>
                   <th style="width: 50px;">No</th>
+                  <th>Date</th>
                   <th>Transaksi ID</th>
                   <th>Supplier Name</th>
                   <th>Nama Barang</th>
                   <th>Total Item</th>
                   <th>Total Harga</th>
-                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,20 +75,20 @@
                   <?php foreach($transaksis as $transaksi){?>
                     <tr>
                       <td><?php $no <= count($transaksis); echo $no++; ?></td>
+                      <td><?php echo $transaksi->date;?></td>
                       <td><?php echo $transaksi->id;?></td>
                       <td><?php echo $transaksi->supplier_name;?></td>
                       <td><?php echo $transaksi->product_name;?></td>
                       <td id="item"><?php echo $transaksi->quantity;?></td>
                       <td>Rp<?php echo number_format($transaksi->total_price);?></td>
                       <td id="item_2" style="display: none;"><?php echo $transaksi->total_price;?></td>
-                      <td><?php echo $transaksi->date;?></td>
                     </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="4">Total</th>
+                  <th colspan="5">Total</th>
                   <th id="total"></th>
                   <th colspan="2" id="harga"></th>
                 </tr>

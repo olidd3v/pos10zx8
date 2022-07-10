@@ -18,7 +18,8 @@
             height: 99%;
           }
             @page {
-                size: 24cm 14cm /* . Random dot? */;
+                size: 24cm/* . Random dot? */;
+                /* size: 24cm 14cm . Random dot?; */
             }
         }
     </style>
@@ -55,6 +56,7 @@
               <thead style="text-align: left; border-top: 1px solid #000;border-bottom: 1px solid #000;">
                 <tr>
                   <th style="width: 50px; border-bottom: 1px solid #000;">No</th>
+                  <th style="border-bottom: 1px solid #000;">Date</th>
                   <th style="border-bottom: 1px solid #000;">Retur ID</th>
                   <th style="border-bottom: 1px solid #000;">Sales Retur ID</th>
                   <th style="border-bottom: 1px solid #000;">Product Name</th>
@@ -62,7 +64,6 @@
                   <th style="border-bottom: 1px solid #000;">Harga Satuan</th>
                   <th style="border-bottom: 1px solid #000;">Total Harga</th>
                   <th style="border-bottom: 1px solid #000;">Pengembalian Barang</th>
-                  <th style="border-bottom: 1px solid #000;">Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,7 @@
                   <?php foreach($penjualans as $penjualan){?>
                     <tr>
                       <td><?php $no <= count($penjualans); echo $no++; ?></td>
+                      <td><?php echo $penjualan->date;?></td>
                       <td><?php echo $penjualan->id;?></td>
                       <td>
                       <?php echo $penjualan->sales_retur_id;?>
@@ -81,17 +83,17 @@
                       <td id="item_3" style="display: none;"><?php echo $penjualan->subtotal;?></td>
                       <td>Rp<?php echo number_format($penjualan->subtotal);?></td>
                       <td><?php echo $penjualan->is_return == 1 ? "Complete" : "Not Complete";?></td>
-                      <td><?php echo $penjualan->date;?></td>
                     </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr style="border-top: 1px solid #000;">
-                  <th colspan="4" style="border-top: 1px solid #000;">Total</th>
+                  <th colspan="5" style="border-top: 1px solid #000;">Total</th>
                   <th id="total" style="border-top: 1px solid #000;"></th>
                   <th id="harga" style="border-top: 1px solid #000;"></th>
-                  <th id="hargax" coslpan="3" style="border-top: 1px solid #000;"></th>
+                  <th id="hargax" coslpan="4" style="border-top: 1px solid #000;"></th>
+                  <th id="hargax" style="border-top: 1px solid #000;"></th>
                 </tr>
                 </tfoot>
               </table>

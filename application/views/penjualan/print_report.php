@@ -18,7 +18,8 @@
             height: 99%;
           }
             @page {
-                size: 24cm 14cm /* . Random dot? */;
+                size: 24cm;
+                /* size: 24cm 14cm . Random dot?; */
             }
         }
     </style>
@@ -55,6 +56,7 @@
               <thead style="text-align: left; border-top: 1px solid #000;border-bottom: 1px solid #000;">
                 <tr>
                   <th style="width: 50px; border-bottom: 1px solid #000;">No</th>
+                  <th style="border-bottom: 1px solid #000;">Date</th>
                   <th style="border-bottom: 1px solid #000;">penjualan ID</th>
                   <th style="border-bottom: 1px solid #000;">Customer Name</th>
                   <th style="border-bottom: 1px solid #000;">Nama Barang</th>
@@ -62,7 +64,6 @@
                   <th style="border-bottom: 1px solid #000;">Harga Satuan</th>
                   <th style="border-bottom: 1px solid #000;">Total Harga</th>
                   <th style="border-bottom: 1px solid #000;">Metode Pembayaran</th>
-                  <th style="border-bottom: 1px solid #000;">Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,7 @@
                   <?php foreach($penjualans as $penjualan){?>
                     <tr>
                       <td><?php $no <= count($penjualans); echo $no++; ?></td>
+                      <td><?php echo $penjualan->date;?></td>
                       <td><?php echo $penjualan->id;?></td>
                       <td><?php echo $penjualan->customer_id;?></td>
                       <td><?php echo $penjualan->product_name;?></td>
@@ -79,14 +81,13 @@
                       <td style="display: none;" id="item_2"><?php echo $penjualan->subtotal;?></td>
                       <td style="display: none;" id="item_3"><?php echo $penjualan->price_item;?></td>
                       <td><?php echo $penjualan->is_cash == 1 ? "Cash" : "Debit";?></td>
-                      <td><?php echo $penjualan->date;?></td>
                     </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="4" style="border-top: 1px solid #000;">Total</th>
+                  <th colspan="5" style="border-top: 1px solid #000;">Total</th>
                   <th id="total" style="border-top: 1px solid #000;"></th>
                   <th style="border-top: 1px solid #000;" id="harga_satuan"></th>
                   <th colspan="3" id="harga" style="border-top: 1px solid #000;"></th>

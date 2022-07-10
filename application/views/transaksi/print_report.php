@@ -18,7 +18,8 @@
             height: 99%;
           }
             @page {
-                size: 24cm 14cm /* . Random dot? */;
+                size: 24cm;
+                /* size: 24cm 14cm . Random dot?; */
             }
         }
     </style>
@@ -55,12 +56,12 @@
               <thead style="text-align: left; border-top: 1px solid #000;border-bottom: 1px solid #000;">
                 <tr>
                   <th style="width: 50px; border-bottom: 1px solid #000;">No</th>
+                  <th style="border-bottom: 1px solid #000;">Date</th>
                   <th style="border-bottom: 1px solid #000;">Transaksi ID</th>
                   <th style="border-bottom: 1px solid #000;">Supplier Name</th>
                   <th style="border-bottom: 1px solid #000;">Nama Barang</th>
                   <th style="border-bottom: 1px solid #000;">Total Item</th>
                   <th style="border-bottom: 1px solid #000;">Total Harga</th>
-                  <th style="border-bottom: 1px solid #000;">Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,20 +69,20 @@
                   <?php foreach($transaksis as $transaksi){?>
                     <tr>
                       <td><?php $no <= count($transaksis); echo $no++; ?></td>
+                      <td><?php echo $transaksi->date;?></td>
                       <td><?php echo $transaksi->id;?></td>
                       <td><?php echo $transaksi->supplier_name;?></td>
                       <td><?php echo $transaksi->product_name;?></td>
                       <td id="item"><?php echo $transaksi->total_item;?></td>
                       <td>Rp<?php echo number_format($transaksi->total_price);?></td>
                       <td id="item_2" style="display: none;"><?php echo $transaksi->total_price;?></td>
-                      <td><?php echo $transaksi->date;?></td>
                     </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="4" style="border-top: 1px solid #000;">Total</th>
+                  <th colspan="5" style="border-top: 1px solid #000;">Total</th>
                   <th id="total" style="border-top: 1px solid #000;"></th>
                   <th colspan="2" id="harga" style="border-top: 1px solid #000;"></th>
                 </tr>

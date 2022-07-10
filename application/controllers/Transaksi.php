@@ -104,6 +104,59 @@ class Transaksi extends MY_Controller {
 		$data['code_pembelian'] = "INP".strtotime(date("Y-m-d H:i:s"));
 		$this->load->view('transaksi/form',$data);
 	}
+
+	function create_po($id){
+		$data['judul_app'] = $this->setting_model->get_by_id(1);
+		// destry cart
+		$this->cart->destroy();
+
+		$details = $this->transaksi_model->get_detail($id);
+		if(!$details){
+			redirect(site_url());
+		}
+		$cart_data = $this->_process_cart($details);
+		//print_r($cart_data); exit;
+		$data['carts'] = $cart_data;
+		$data['code_penjualan'] = $id;
+		$data['code_po'] = "PO".strtotime(date("Y-m-d H:i:s"));
+		$data['kategoris'] = $this->kategori_model->get_all();
+		$data['details'] = $details;
+		$this->load->view('transaksi/form_po',$data);
+	}
+
+	public function add_process_po(){
+		$id_po = $this->input->post('id_pox');
+		$po_price = $this->input->post('po_price');
+			// $data = array(
+			// 	'id' => $id_po,
+			// 	'po_price' => $po_price
+			// );
+		// echo json_encode($data);
+		$d = count($id_po);
+		for($x=0;$x<$d;$x++){
+            $data = array(
+				'id' => $id_po[$x],
+				'po_price' => $po_price[$x]
+			);
+		echo json_encode($data);
+		}
+	}
+	private function _insert_purchase_data_po($transaction_id,$carts){
+		foreach($carts as $key => $cart){
+			$purchase_data = array(
+				'transaction_id' => $transaction_id,
+				'product_id' => $cart['id'],
+				'category_id' => $cart['category_id'],
+				'quantity' => $cart['qty'],
+				'price_item' => $cart['price'],
+				'subtotal' => $cart['subtotal']
+			);
+			// $this->transaksi_model->insert_purchase_data($purchase_data);
+
+			$this->produk_model->update_qty_add($cart['id'],array('product_qty' => $cart['qty']));
+		}
+		$this->cart->destroy();
+	}
 	
 	public function detail($id){
 		$data['judul_app'] = $this->setting_model->get_by_id(1);
@@ -242,7 +295,7 @@ class Transaksi extends MY_Controller {
 			);
 			$this->transaksi_model->insert_purchase_data($purchase_data);
 
-			$this->produk_model->update_qty_add($cart['id'],array('product_qty' => $cart['qty']));
+			// $this->produk_model->update_qty_add($cart['id'],array('product_qty' => $cart['qty']));
 		}
 		$this->cart->destroy();
 	}

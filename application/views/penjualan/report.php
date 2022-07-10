@@ -69,13 +69,13 @@
                 <thead style="text-align: left;">
                 <tr>
                 <th>penjualan ID</th>
+                  <th>Date</th>
                   <th>Customer Name</th>
                   <th>Nama Barang</th>
                   <th>Total Item</th>
                   <th>Harga Satuan</th>
                   <th>Total Harga</th>
                   <th>Metode Pembayaran</th>
-                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -83,6 +83,7 @@
                   <?php foreach($penjualans as $penjualan){?>
                     <tr>
                       <td><?php echo $penjualan->id;?></td>
+                      <td><?php echo $penjualan->date;?></td>
                       <td><?php echo $penjualan->customer_id;?></td>
                       <td><?php echo $penjualan->product_name;?></td>
                       <td id="item"><?php echo $penjualan->quantity;?></td>
@@ -91,14 +92,13 @@
                       <td style="display: none;" id="item_2"><?php echo $penjualan->subtotal;?></td>
                       <td style="display: none;" id="item_3"><?php echo $penjualan->price_item;?></td>
                       <td><?php echo $penjualan->is_cash == 1 ? "<span class='label label-success'>Cash</span>" : "<span class='label label-primary'>Debit</span>";?></td>
-                      <td><?php echo $penjualan->date;?></td>
                     </tr>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
                 <tfoot style="text-align: left;">
                 <tr>
-                  <th colspan="3" style="border-top: 1px solid #000;">Total</th>
+                  <th colspan="4" style="border-top: 1px solid #000;">Total</th>
                   <th id="total" style="border-top: 1px solid #000;"></th>
                   <th style="border-top: 1px solid #000;" id="harga_satuan"></th>
                   <th colspan="3" id="harga" style="border-top: 1px solid #000;"></th>
