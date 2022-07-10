@@ -51,7 +51,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
+                  <div class="form-group" style="display: none;">
                     <label class="col-sm-4 control-label" for="date">Tanggal</label>
                     <div class="col-sm-8">
                       <input type="text" value="<?php echo !empty($produk) ? $produk['date'] : date('Y-m-d H:i:s');?>" id="date" class="form-control" disabled/>
