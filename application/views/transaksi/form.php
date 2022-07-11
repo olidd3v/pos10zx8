@@ -150,7 +150,7 @@
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
                                 <td><?php echo $cart['qty'];?></td>
-                                <td>Rp<?php echo number_format($cart['price']);?></td>
+                                <!-- <td>Rp<?php echo number_format($cart['price']);?></td> -->
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
                             <?php }?>
@@ -159,7 +159,7 @@
                       <tfoot>
                         <tr>
                           <th colspan="3">Total Pembelian</th>
-                          <th colspan="2" id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></th>
+                          <!-- <th colspan="2" id="total-pembelian"><?php echo !empty($carts) ? 'Rp'.number_format($carts['total_price']) : '';?></th> -->
                         </tr>
                       </tfoot>
                     </table>

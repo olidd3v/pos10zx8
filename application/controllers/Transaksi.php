@@ -126,6 +126,8 @@ class Transaksi extends MY_Controller {
 
 	public function add_process_po(){
 		$id_po = $this->input->post('id_pox');
+		$product_id = $this->input->post('product_id');
+		$qty = $this->input->post('qty');
 		$po_price = $this->input->post('po_price');
 			// $data = array(
 			// 	'id' => $id_po,
@@ -133,12 +135,29 @@ class Transaksi extends MY_Controller {
 			// );
 		// echo json_encode($data);
 		$d = count($id_po);
+		
 		for($x=0;$x<$d;$x++){
             $data = array(
-				'id' => $id_po[$x],
-				'po_price' => $po_price[$x]
+				'transaction_id' => $id_po[$x],
+				'product_id' => $product_id[$x],
+				'quantity' => $qty[$x],
+				'price_item' => $po_price[$x],
+				'subtotal' => $qty[$x]*$po_price[$x]
 			);
 		echo json_encode($data);
+		$this->db->where("transaction_id", $id_po[$x]);
+		$this->db->where("product_id", $product_id[$x]);
+		$this->db->update("purchase_data", $data);
+		$val[$x]= $data['subtotal'];
+		$idx = $data['transaction_id'];
+		}
+		$sum = array_sum($val);
+		$arr = array('total_price' => $sum);
+		$this->db->where("id", $idx);
+		$this->db->update("purchase_transaction", $arr);
+		echo json_encode($idx);
+		if ($data == TRUE) {
+			redirect(site_url('transaksi'));
 		}
 	}
 	private function _insert_purchase_data_po($transaction_id,$carts){

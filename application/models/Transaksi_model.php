@@ -8,6 +8,7 @@ class Transaksi_model extends CI_Model {
         parent::__construct();
 		$this->table = "purchase_transaction";
 		$this->select_defaultx = 'purchase_transaction.id AS id, supplier_name, total_price, total_item,purchase_transaction.date AS date';
+		// $this->select_defaultx = 'purchase_transaction.id AS id, supplier_name, total_price, total_item,purchase_transaction.date AS date, purchase_data.subtotal as sub';
 		$this->select_default = 'purchase_transaction.id AS id, product_id, product_name, supplier_name, total_price, total_item,purchase_transaction.date AS date, quantity';
 
 	}
@@ -15,6 +16,7 @@ class Transaksi_model extends CI_Model {
 	public function get_all($limit_offset = array()){
 		$this->db->select($this->select_defaultx);
 		$this->db->join('supplier', 'supplier.id = purchase_transaction.supplier_id', 'left');
+		// $this->db->join('purchase_data', 'purchase_data.transaction_id = purchase_transaction.id', 'left');
 		$this->db->order_by("date", "desc");
 		if(!empty($limit_offset)){
 			$query = $this->db->get($this->table,$limit_offset['limit'],$limit_offset['offset']);
