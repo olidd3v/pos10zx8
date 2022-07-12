@@ -71,7 +71,7 @@
                   <th>Date</th>
                   <th>Sales Retur ID</th>
                   <th>Product Name</th>
-                  <th>Total Item</th>
+                  <th>Qty</th>
                   <th>Harga Satuan</th>
                   <th>Total Harga</th>
                   <th>Pengembalian Barang</th>

@@ -60,7 +60,7 @@
                   <th style="border-bottom: 1px solid #000;">Retur ID</th>
                   <th style="border-bottom: 1px solid #000;">Sales Retur ID</th>
                   <th style="border-bottom: 1px solid #000;">Product Name</th>
-                  <th style="border-bottom: 1px solid #000;">Total Item</th>
+                  <th style="border-bottom: 1px solid #000;">Qty</th>
                   <th style="border-bottom: 1px solid #000;">Harga Satuan</th>
                   <th style="border-bottom: 1px solid #000;">Total Harga</th>
                   <th style="border-bottom: 1px solid #000;">Pengembalian Barang</th>
