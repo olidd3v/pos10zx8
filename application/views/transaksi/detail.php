@@ -30,6 +30,7 @@
                             <div class="pull-right">
                                 <?php if ($details[0]->total_price == 0 || $details[0]->total_price == NULL) { ?>
                                 <span><a href="<?php echo site_url('transaksi');?>" class="btn btn-sm btn-default">Back</a></span>
+                                <a href="<?php echo site_url('transaksi/create_po').'/'.$transaksi->id;?>" class="btn btn-sm btn-success">Confirm PO</a>
                                 <?php }else{ ?>
                                 <span><a href="<?php echo site_url('transaksi/confirm_index');?>" class="btn btn-sm btn-default">Back</a></span>
                                 <?php } ?>

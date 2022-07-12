@@ -83,23 +83,32 @@
             <tr>
                 <td style="width:160px;">Name</td>
                 <td style="width:100px;">Category</td>
+                <?php if ($details[0]->total_price == 0 || $details[0]->total_price == NULL) { ?>
+                <td colspan="3" style="width: 450px;text-align: right;">Quantity</td>
+                <?php }else {?>
                 <td style="width:100px;">Quantity</td>
                 <td style="width:200px;">Price/item</td>
                 <td style="width:100px;text-align: right;">Subtotal</td>
+                <?php } ?>
             </tr>
             </thead>
         </table>
         <?php echo $line;?>
         <table>
             <thead  style="height:270px;">
+
             <?php if(isset($details) && is_array($details)){ ?>
-                <?php foreach($details as $key => $transaksi){?>
+                <?php foreach($details as $key => $transaksi){?>                    
                     <tr valign="top" style="height:10px;font-size:14px;">
                         <td style="width:160px;"><?php echo $transaksi->product_name;?></td>
                         <td style="width:100px; text-align: left;"><?php echo $transaksi->category_name;?></td>
+                        <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
+                        <td  colspan="3" style="width:100px; text-align: right;"><?php echo $transaksi->quantity;?></td>
+                        <?php }else{ ?>
                         <td style="width:100px; text-align: left;"><?php echo $transaksi->quantity;?></td>
                         <td style="width:200px; text-align: left;">Rp<?php echo number_format($transaksi->price_item);?></td>
                         <td style="width:100px; text-align: right;">Rp<?php echo number_format($transaksi->subtotal);?></td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
                 <?php $total = 10 - ($key + 1);
@@ -113,9 +122,12 @@
                     </tr>
                 <?php } ?>
             <?php } ?>
+
             </thead>
         </table>
         <?php echo $line;?>
+        <?php if ($details[0]->total_price == 0 || $details[0]->total_price == NULL) { ?>
+        <?php }else {?>
         <table>
             <thead>
             <tr>
@@ -128,6 +140,7 @@
             </thead>
         </table>
         <?php echo $line;?>
+        <?php } ?>
         <br />
         <table style="display: none;">
             <thead>
