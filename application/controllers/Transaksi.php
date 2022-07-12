@@ -43,6 +43,31 @@ class Transaksi extends MY_Controller {
 		$this->load->view('transaksi/index',$data);
 	}
 
+	function confirm_index(){
+		$data['judul_app'] = $this->setting_model->get_by_id(1);
+		if(isset($_GET['search'])){
+			$filter = array();
+			if(!empty($_GET['id']) && $_GET['id'] != ''){
+				$filter['purchase_transaction.id LIKE'] = "%".$_GET['id']."%";
+			}
+			if(!empty($_GET['date_from']) && $_GET['date_from'] != ''){
+				$filter['DATE(purchase_transaction.date) >='] = $_GET['date_from'];
+			}
+
+			if(!empty($_GET['date_end']) && $_GET['date_end'] != ''){
+				$filter['DATE(purchase_transaction.date) <='] = $_GET['date_end'];
+			}
+
+			$total_row = $this->transaksi_model->count_total_filter($filter);
+			$data['transaksis'] = $this->transaksi_model->get_filter($filter,url_param());
+		}else{
+			$total_row = $this->transaksi_model->count_total();
+			$data['transaksis'] = $this->transaksi_model->get_all(url_param());
+		}
+		$data['paggination'] = get_paggination($total_row,get_search());
+		$this->load->view('transaksi/confirm_index',$data);
+	}
+
 	function report(){
 		$data['judul_app'] = $this->setting_model->get_by_id(1);
 		if(isset($_GET['search'])){

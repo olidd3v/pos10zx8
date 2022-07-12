@@ -80,6 +80,8 @@
                 <tbody>
                 <?php if(isset($penjualans) && is_array($penjualans)){ ?>
                   <?php foreach($penjualans as $penjualan){?>
+                  <?php if ($penjualan->total_price == 0 || $penjualan->total_price == NULL) { ?>
+                  <?php } else {?>
                 <tr>
                   <td><?php echo $penjualan->id;?></td>
                   <td><?php echo $penjualan->date;?></td>
@@ -94,6 +96,7 @@
                   <td>Rp<?php echo number_format($penjualan->subtotal);?></td>
                   <td><?php echo $penjualan->is_return == 1 ? "Complete" : "Not Complete";?></td>
                 </tr>
+                  <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 </tbody>

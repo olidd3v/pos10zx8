@@ -4,8 +4,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Transaksi Retur Purchase
-        <small>List Retur Purchase</small>
+        Transaksi Pembelian
+        <small>List Transaksi</small>
       </h1>
     </section>
 
@@ -14,22 +14,23 @@
       <div class="row">
         <div class="col-xs-12">
           <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="<?php echo site_url('retur_purchase/create');?>">Input Retur Purchase</a></li>
-            <li role="presentation"><a href="<?php echo site_url('retur_purchase');?>">List Retur Purchase</a></li>
-            <li role="presentation"><a href="<?php echo site_url('retur_purchase/report?search=true&date_from=&date_end=');?>">Report Retur Purchase</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/create');?>">Input Transaksi</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi');?>">List Transaksi</a></li>
+            <li role="presentation" class="active"><a href="<?php echo site_url('transaksi/confirm_index');?>">List Transaksi PO</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table Purchase</h3>
+              <h3 class="box-title">Data Table Transaksi</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form action="<?php echo site_url('retur_purchase/create?search=true');?>" method="GET">
+              <form action="<?php echo site_url('transaksi?search=true');?>" method="GET">
                 <input type="hidden" class="form-control" name="search" value="true"/>
                 <div class="box-body pad">
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label for="id">Code Transaksi</label>
+                      <label for="id">Kode Transaksi</label>
                       <input type="text" class="form-control" name="id" value="<?php echo !empty($_GET['id']) ? $_GET['id'] : '';?>"/>
                     </div>
                   </div>
@@ -37,7 +38,7 @@
                     <div class="form-group">
                       <label>Date From</label>
                       <div class="input-group date">
-                        <input type="text" class="form-control datepicker-transaksi" name="date_from" value="<?php echo !empty($_GET['date_from']) ? $_GET['date_from'] : '';?>"/>
+                        <input type="text" class="form-control datepicker" name="date_from" value="<?php echo !empty($_GET['date_from']) ? $_GET['date_from'] : '';?>"/>
                       </div>
                     </div>
                   </div>
@@ -45,7 +46,7 @@
                     <div class="form-group">
                       <label>Date End</label>
                       <div class="input-group date">
-                        <input type="text" class="form-control datepicker-transaksi" name="date_end" value="<?php echo !empty($_GET['date_end']) ? $_GET['date_end'] : '';?>"/>
+                        <input type="text" class="form-control datepicker" name="date_end" value="<?php echo !empty($_GET['date_end']) ? $_GET['date_end'] : '';?>"/>
                       </div>
                     </div>
                   </div>
@@ -61,6 +62,7 @@
                 <thead>
                 <tr>
                   <th>Transaksi ID</th>
+                  <th>Supplier Name</th>
                   <th>Total Item</th>
                   <th>Total Harga</th>
                   <th>Date</th>
@@ -68,23 +70,32 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if(isset($penjualans) && is_array($penjualans)){ ?>
-                  <?php foreach($penjualans as $penjualan){?>
-                    <?php if ($penjualan->total_price == 0 || $penjualan->total_price == NULL) { ?>
-                    <?php } else {?>
+                <?php if(isset($transaksis) && is_array($transaksis)){ ?>
+                  <?php foreach($transaksis as $transaksi){?>
+                    <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
+                    <?php }else { ?>
                     <tr>
-                      <td><?php echo $penjualan->id;?></td>
-                      <td><?php echo $penjualan->total_item;?></td>
-                      <td>Rp<?php echo number_format($penjualan->total_price);?></td>
-                      <td><?php echo $penjualan->date;?></td>
+                      <td><?php echo $transaksi->id;?></td>
+                      <td><?php echo $transaksi->supplier_name;?></td>
+                      <td><?php echo $transaksi->total_item;?></td>
+                      <td>Rp<?php echo number_format($transaksi->total_price);?></td>
+                      <td><?php echo $transaksi->date;?></td>
                       <td>
-                        <a href="<?php echo site_url('retur_purchase/create_retur').'/'.$penjualan->id;?>" class="btn btn-xs btn-primary">Retur</a>
+                        <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
+                        <a href="<?php echo site_url('transaksi/create_po').'/'.$transaksi->id;?>" class="btn btn-xs btn-primary">Confirmation</a>
+                        <?php }else { ?>
+                          <span class="label label-success">Confirmed</span>
+                          <?php } ?>
+                        <a href="<?php echo site_url('transaksi/detail').'/'.$transaksi->id;?>" class="btn btn-xs btn-default">Detail</a>
+                        <a onclick="return confirm('Are you sure you want to delete this transaction?');" href="<?php echo site_url('transaksi/delete').'/'.$transaksi->id;?>" class="btn btn-xs btn-danger">Delete</a>
                       </td>
                     </tr>
-                  <?php } ?>
+                    <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 </tbody>
+                <tfoot>
+                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->

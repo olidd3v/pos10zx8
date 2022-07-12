@@ -16,6 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation"><a href="<?php echo site_url('transaksi/create');?>">Input Transaksi</a></li>
             <li role="presentation"><a href="<?php echo site_url('transaksi');?>">List Transaksi</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/confirm_index');?>">List Transaksi PO</a></li>
             <li role="presentation" class="active"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
           <div class="box">
@@ -73,7 +74,9 @@
                 <tbody>
                 <?php $no = 1; if(isset($transaksis) && is_array($transaksis)){ ?>
                   <?php foreach($transaksis as $transaksi){?>
-                    <tr>
+                    <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
+                    <?php }else{ ?>
+                      <tr>
                       <td><?php $no <= count($transaksis); echo $no++; ?></td>
                       <td><?php echo $transaksi->date;?></td>
                       <td><?php echo $transaksi->id;?></td>
@@ -83,6 +86,7 @@
                       <td>Rp<?php echo number_format($transaksi->total_price);?></td>
                       <td id="item_2" style="display: none;"><?php echo $transaksi->total_price;?></td>
                     </tr>
+                    <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 </tbody>

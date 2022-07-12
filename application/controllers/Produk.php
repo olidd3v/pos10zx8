@@ -101,7 +101,7 @@ class Produk extends MY_Controller {
             $this->produk_model->insert($data);
         }else{
             $this->session->set_flashdata('form_false', 'Harap periksa form anda.');
-            redirect(site_url('produk/create'));
+            redirect(site_url('produk/edit',$id));
         }
         redirect(site_url('produk'));
     }

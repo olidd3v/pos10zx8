@@ -31,7 +31,8 @@
             <!-- /.box-header -->
             <!-- form start -->
             <?php if(!empty($edit) && $edit){?>
-            <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/update').'/'.$code_retur_penjualan;?>">
+            <!-- <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/update').'/'.$code_retur_penjualan;?>"> -->
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/update').'/'.$code_retur_penjualan;?>">
             <?php }else{?>
             <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/add_process');?>">
             <?php } ?>
@@ -93,13 +94,16 @@
                           <td>Action</td>
                         </tr>
                       </thead>
-                      <tbody id="transaksi-item">
+                      <tbody>
+                      <!-- <tbody id="transaksi-item"> -->
                         <?php if(!empty($carts) && is_array($carts)){?>
                             <?php foreach($carts['data'] as $k => $cart){?>
-                              <tr id="<?php echo $k;?>" class="cart-value">
+                              <tr>
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
-                                <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
+                                <input type="hidden" name="idx[]" value="<?php echo $cart['id'];?>">
+                                <!-- <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td> -->
+                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
@@ -120,7 +124,7 @@
               <div class="box-footer">
                 <div class="col-md-3 col-md-offset-4">
                   <a class="btn btn-default" href="<?php echo site_url('retur_purchase');?>">Cancel</a>
-                  <button type="submit" id="submit-transaksi" class="btn btn-info pull-right">Submit</button>
+                  <button type="submit" class="btn btn-info pull-right">Submit</button>
                 </div>
               </div>
               <!-- /.box-footer -->

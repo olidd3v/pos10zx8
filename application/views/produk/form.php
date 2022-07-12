@@ -40,7 +40,7 @@
                     <label class="col-sm-4 control-label" for="kode">Kode Produk</label>
                     <div class="col-sm-8">
                       <input type="text" value="<?php echo !empty($produk) ? $produk['id'] : $kode_produk;?>" name="product_id" id="kode_produk" class="form-control" disabled/>
-                      <input type="hidden" name="product_id" value="<?php echo !empty($kategori) ? $kategori['id'] : $kode_produk;?>" id="kode_produk" class="form-control"/>
+                      <input type="hidden" name="product_id" value="<?php echo !empty($produk) ? $produk['id'] : $kode_produk;?>" id="kode_produk" class="form-control"/>
                     </div>
                   </div>
                   <div class="form-group">

@@ -16,6 +16,7 @@
           <ul class="nav nav-tabs">
             <li role="presentation"><a href="<?php echo site_url('transaksi/create');?>">Input Transaksi</a></li>
             <li role="presentation" class="active"><a href="<?php echo site_url('transaksi');?>">List Transaksi</a></li>
+            <li role="presentation"><a href="<?php echo site_url('transaksi/confirm_index');?>">List Transaksi PO</a></li>
             <li role="presentation"><a href="<?php echo site_url('transaksi/report?search=true&date_from=&date_end=');?>">Report Transaksi</a></li>
           </ul>
           <div class="box">
@@ -63,7 +64,6 @@
                   <th>Transaksi ID</th>
                   <th>Supplier Name</th>
                   <th>Total Item</th>
-                  <th>Total Harga</th>
                   <th>Date</th>
                   <th>Action</th>
                 </tr>
@@ -71,28 +71,18 @@
                 <tbody>
                 <?php if(isset($transaksis) && is_array($transaksis)){ ?>
                   <?php foreach($transaksis as $transaksi){?>
+                    <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
                     <tr>
                       <td><?php echo $transaksi->id;?></td>
                       <td><?php echo $transaksi->supplier_name;?></td>
                       <td><?php echo $transaksi->total_item;?></td>
-                      <td>
-                      <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
-                          -
-                        <?php }else { ?>
-                        Rp<?php echo number_format($transaksi->total_price);?>
-                          <?php } ?>
-                      </td>
                       <td><?php echo $transaksi->date;?></td>
                       <td>
-                        <?php if ($transaksi->total_price == 0 || $transaksi->total_price == NULL) { ?>
-                        <a href="<?php echo site_url('transaksi/create_po').'/'.$transaksi->id;?>" class="btn btn-xs btn-primary">Confirmation</a>
-                        <?php }else { ?>
-                          <span class="label label-success">Confirmed</span>
-                          <?php } ?>
                         <a href="<?php echo site_url('transaksi/detail').'/'.$transaksi->id;?>" class="btn btn-xs btn-default">Detail</a>
                         <a onclick="return confirm('Are you sure you want to delete this transaction?');" href="<?php echo site_url('transaksi/delete').'/'.$transaksi->id;?>" class="btn btn-xs btn-danger">Delete</a>
                       </td>
                     </tr>
+                  <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 </tbody>

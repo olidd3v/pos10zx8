@@ -281,6 +281,7 @@ class Retur_purchase extends MY_Controller {
 				$this->_insert_purchase_data($data['id'],$carts);
 			}
 			echo json_encode(array('status' => 'ok'));
+			redirect(site_url('retur_purchase'));
 		}else{
 			echo json_encode(array('status' => 'error', 'carts' => $carts));
 		}
@@ -311,55 +312,46 @@ class Retur_purchase extends MY_Controller {
 	}
 
 	public function update($retur_id = 0){
-		$details = $this->retur_purchase->get_detail_by_id($retur_id);
-		$details_sales = $this->retur_purchase->get_detail_by_sales_id($retur_id);
-		if((!$details || $details[0]->is_return == 1) && (!$details_sales || $details_sales[0]->is_return == 1)){
+		$return_is = $this->input->post('is_return');
+		$idx = $this->input->post('idx');
+		$qty = $this->input->post('qty');
+		$d = count($idx);
+		$z = count($idx);
+		for($e=0;$e<$z;$e++){
+			$data_qty_retur = array (
+				'qty' => $qty[$e]
+			);
+			$val[$e] = $data_qty_retur['qty'];
+		}
+		$sum = array_sum($val);
+		$update_is = array (
+			'id' => $retur_id,
+			'total_item' => $sum,
+			'is_return' => $return_is
+		);
+		$this->db->where("id", $retur_id);
+		$this->db->update("purchase_retur", $update_is);
+		if ($return_is == 1) {
+			for($x=0;$x<$d;$x++){
+				$data_product = array (
+					'id' => $idx[$x],
+					'product_qty' => $qty[$x],
+				);
+				$product = $this->produk_model->get_by_id($data_product['id']);
+				foreach ($product as $v) {
+					$qty_product = $v['product_qty'];
+				}
+				$fix_data_product = array (
+					'id' =>$idx[$x],
+					'product_qty' => $qty_product-$qty[$x],
+				);
+				$this->db->where("id", $idx[$x]);
+				$this->db->update("product", $fix_data_product);
+			}
 			redirect(site_url('retur_purchase'));
-		}
-		if(!$details){
-			$details = $details_sales;
-		}
-
-		$carts =  $this->cart->contents();
-		$is_return = escape($this->input->post("is_return"));
-		// $return_by = escape($this->input->post("return_by"));
-		$check_qty = $this->_check_qty($carts);
-		if(!empty($carts) && is_array($carts) && $check_qty){
-			// Delete Row on sales_data table
-			foreach($details as $detail){
-				if($details_sales){
-					$this->retur_purchase->delete_data_sales($detail->sales_retur_id);
-				}else{
-					$this->retur_purchase->delete_data($detail->id);
-				}
-			}
-
-			$data['id'] = $retur_id;
-			$data['total_price'] = $this->cart->total();
-			$data['total_item'] = $this->cart->total_items();
-			$data['is_return'] = ($is_return != "undefined") ? (int)$is_return : "0";
-			// $data['return_by'] = ($return_by != "undefined") ? (int)$return_by : "0";
-
-			$is_return_old = $details[0]->is_return;
-			if($is_return == 1 && $is_return_old != 1 && strpos($details[0]->sales_retur_id, "RETS") !== false && $return_by == 1){
-				// Update product and retur purchase
-				foreach($carts as $cart){
-					$this->produk_model->update_qty_add($cart['id'],array('product_qty' => $cart['qty']));
-				}
-			}
-			$this->retur_purchase->update($retur_id,$data);
-			
-			if($data['id']){
-
-				$this->_insert_purchase_data($data['id'],$carts);
-			}
-
-			echo json_encode(array('status' => 'ok','is_return' => $is_return));
-		}else if(!$check_qty){
-			echo json_encode(array('status' => 'limit'));
 		}else{
-			echo json_encode(array('status' => 'error','is_return' => $is_return));
-		}
+			redirect(site_url('retur_purchase'));
+		}	
 	}
 
 	private function _check_qty($carts){
