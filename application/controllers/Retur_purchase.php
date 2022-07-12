@@ -286,6 +286,7 @@ class Retur_purchase extends MY_Controller {
 			'sales_retur_id' => $retur_code,
 			'total_price' => $sum_2,
 			'total_item' => $sum,
+			'is_return' => 0
 		);
 		$this->db->insert("purchase_retur", $update_is);
 			for($x=0;$x<$d;$x++){

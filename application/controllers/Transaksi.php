@@ -194,7 +194,7 @@ class Transaksi extends MY_Controller {
 		$idx = $data['transaction_id'];
 		}
 		$sum = array_sum($val);
-		$sum_3 = array_sum($qt);
+		$sum_3 = count($qt);
 		$arr = array('total_price' => $sum, 'total_item' => $sum_3);
 		$this->db->where("id", $idx);
 		$this->db->update("purchase_transaction", $arr);

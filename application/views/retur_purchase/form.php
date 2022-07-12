@@ -104,7 +104,7 @@
                                 <td><?php echo $cart['name'];?></td>
                                 <input type="hidden" name="idx[]" value="<?php echo $cart['id'];?>">
                                 <!-- <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td> -->
-                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
+                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
                                 <input type="hidden" name="total_price[]" value="<?php echo $cart['price']; ?>">
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
@@ -145,7 +145,7 @@
           var con = document.getElementById("jml_qty").value;
           var btn = document.getElementById("submit-transaksi");
 
-          if (con > <?php echo $details[0]->total_item;?> ) {
+          if (con > <?php echo $cart['qty'];?> ) {
             alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
             location.reload();
             btn.style.display = "none";
