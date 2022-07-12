@@ -34,7 +34,8 @@
             <!-- <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/update').'/'.$code_retur_penjualan;?>"> -->
             <form class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/update').'/'.$code_retur_penjualan;?>">
             <?php }else{?>
-            <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/add_process');?>">
+            <form class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/add_process');?>">
+            <!-- <form id="transaction-form" class="form-horizontal" method="POST" action="<?php echo site_url('retur_purchase/add_process');?>"> -->
             <?php } ?>
               <div class="box-body">
                 <div class="col-md-6">
@@ -105,6 +106,7 @@
                                 <!-- <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td> -->
                                 <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
+                                <input type="hidden" name="total_price[]" value="<?php echo $cart['price']; ?>">
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
                             <?php }?>

@@ -261,30 +261,74 @@ class Retur_purchase extends MY_Controller {
 	}
 
 	public function add_process(){
-		$this->form_validation->set_rules('retur_id', 'retur_id', 'required');
-		$this->form_validation->set_rules('retur_code', 'retur_code', 'required');
-		$this->form_validation->set_rules('retur_date', 'retur_date', 'required');
+		$return_is = $this->input->post('is_return');
+		$idr = $this->input->post('retur_id');
+		$retur_code = $this->input->post('retur_code');
+		$idx = $this->input->post('idx');
+		$qty = $this->input->post('qty');
+		$total_price = $this->input->post('total_price');
+		$d = count($idx);
+		$z = count($idx);
+		
+		for($e=0;$e<$z;$e++){
+			$data_qty_retur = array (
+				'qty' => $qty[$e],
+				'total_price' => $total_price[$e]
+			);
+			$val[$e] = $data_qty_retur['qty'];
+			$total_price_f[$e] = $data_qty_retur['total_price'];
 
-		$carts =  $this->cart->contents();
-
-		if($this->form_validation->run() != FALSE && !empty($carts) && is_array($carts)){
-			$data['id'] = escape($this->input->post('retur_id'));
-			$data['sales_retur_id'] = escape($this->input->post('retur_code'));
-			$data['total_price'] = $this->cart->total();
-			$data['total_item'] = $this->cart->total_items();
-			$data['is_return'] = "0";
-			$data['date'] = escape($this->input->post('retur_date'));
-
-			$this->retur_purchase->insert($data);
-			// $this->produk_model->update_qty_plus_retur();
-			if($data['id']){
-				$this->_insert_purchase_data($data['id'],$carts);
-			}
-			echo json_encode(array('status' => 'ok'));
-			redirect(site_url('retur_purchase'));
-		}else{
-			echo json_encode(array('status' => 'error', 'carts' => $carts));
 		}
+		$sum_2 = array_sum($total_price_f);
+		$sum = array_sum($val);
+		$update_is = array (
+			'id' => $idr,
+			'sales_retur_id' => $retur_code,
+			'total_price' => $sum_2,
+			'total_item' => $sum,
+		);
+		$this->db->insert("purchase_retur", $update_is);
+			for($x=0;$x<$d;$x++){
+				$data_product = array (
+					'id' => $idx[$x],
+					'product_qty' => $qty[$x],
+				);
+				$product = $this->produk_model->get_by_id($data_product['id']);
+				foreach ($product as $v) {
+					$qty_product = $v['product_qty'];
+				}
+				$fix_data_product = array (
+					'id' =>$idx[$x],
+					'product_qty' => $qty_product-$qty[$x],
+				);
+				$this->db->where("id", $idx[$x]);
+				$this->db->update("product", $fix_data_product);
+			}
+			redirect(site_url('retur_purchase'));
+
+		// $this->form_validation->set_rules('retur_id', 'retur_id', 'required');
+		// $this->form_validation->set_rules('retur_code', 'retur_code', 'required');
+		// $this->form_validation->set_rules('retur_date', 'retur_date', 'required');
+
+		// $carts =  $this->cart->contents();
+
+		// if($this->form_validation->run() != FALSE && !empty($carts) && is_array($carts)){
+		// 	$data['id'] = escape($this->input->post('retur_id'));
+		// 	$data['sales_retur_id'] = escape($this->input->post('retur_code'));
+		// 	$data['total_price'] = $this->cart->total();
+		// 	$data['total_item'] = $this->cart->total_items();
+		// 	$data['is_return'] = "0";
+		// 	$data['date'] = escape($this->input->post('retur_date'));
+
+		// 	$this->retur_purchase->insert($data);
+		// 	if($data['id']){
+		// 		$this->_insert_purchase_data($data['id'],$carts);
+		// 	}
+		// 	echo json_encode(array('status' => 'ok'));
+		// 	redirect(site_url('retur_purchase'));
+		// }else{
+		// 	echo json_encode(array('status' => 'error', 'carts' => $carts));
+		// }
 	}
 
 	public function edit($retur_id){
@@ -343,7 +387,7 @@ class Retur_purchase extends MY_Controller {
 				}
 				$fix_data_product = array (
 					'id' =>$idx[$x],
-					'product_qty' => $qty_product-$qty[$x],
+					'product_qty' => $qty_product+$qty[$x],
 				);
 				$this->db->where("id", $idx[$x]);
 				$this->db->update("product", $fix_data_product);
@@ -380,7 +424,7 @@ class Retur_purchase extends MY_Controller {
 			);
 			$this->transaksi_model->insert_purchase_data($purchase_data);
 
-			//$this->produk_model->update_qty_min($cart['id'],array('product_qty' => $cart['qty']));
+			$this->produk_model->update_qty_min($cart['id'],array('product_qty' => $cart['qty']));
 		}
 		$this->cart->destroy();
 	}

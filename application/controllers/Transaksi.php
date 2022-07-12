@@ -160,7 +160,24 @@ class Transaksi extends MY_Controller {
 			// );
 		// echo json_encode($data);
 		$d = count($id_po);
-		
+		$c = count($id_po);
+
+		for($z=0;$z<$c;$z++){
+			$data_product = array (
+				'id' => $product_id[$z],
+				'product_qty' => $qty[$z],
+			);
+			$product = $this->produk_model->get_by_id($data_product['id']);
+			foreach ($product as $v) {
+				$qty_product = $v['product_qty'];
+			}
+			$fix_data_product = array (
+				'id' =>$product_id[$z],
+				'product_qty' => $qty_product+$qty[$z],
+			);
+			$this->db->where("id", $product_id[$z]);
+			$this->db->update("product", $fix_data_product);
+		}
 		for($x=0;$x<$d;$x++){
             $data = array(
 				'transaction_id' => $id_po[$x],
@@ -169,20 +186,20 @@ class Transaksi extends MY_Controller {
 				'price_item' => $po_price[$x],
 				'subtotal' => $qty[$x]*$po_price[$x]
 			);
-		echo json_encode($data);
 		$this->db->where("transaction_id", $id_po[$x]);
 		$this->db->where("product_id", $product_id[$x]);
 		$this->db->update("purchase_data", $data);
 		$val[$x]= $data['subtotal'];
+		$qt[$x]= $data['quantity'];
 		$idx = $data['transaction_id'];
 		}
 		$sum = array_sum($val);
-		$arr = array('total_price' => $sum);
+		$sum_3 = array_sum($qt);
+		$arr = array('total_price' => $sum, 'total_item' => $sum_3);
 		$this->db->where("id", $idx);
 		$this->db->update("purchase_transaction", $arr);
-		echo json_encode($idx);
 		if ($data == TRUE) {
-			redirect(site_url('transaksi'));
+			redirect(site_url('transaksi/confirm_index'));
 		}
 	}
 	private function _insert_purchase_data_po($transaction_id,$carts){
@@ -354,6 +371,19 @@ class Transaksi extends MY_Controller {
 		$this->transaksi_model->delete_purchase_data_trx($transaction_id);
 		redirect(site_url('transaksi'));
 	}
+
+	public function delete_po($transaction_id){
+		$transaksi = $this->transaksi_model->get_detail($transaction_id);
+		foreach($transaksi as $trans){
+			$product = $this->produk_model->get_by_id($trans->product_id);
+			$total = $product[0]['product_qty'] - $trans->quantity;
+			$this->produk_model->update_qty($product[0]['id'] ,array('product_qty' => $total));
+		}
+		$this->transaksi_model->delete($transaction_id);
+		$this->transaksi_model->delete_purchase_data_trx($transaction_id);
+		redirect(site_url('transaksi/confirm_index'));
+	}
+
 	public function export_csv(){
 		$filter = '';
 		if(isset($_GET['search'])) {

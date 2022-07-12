@@ -87,7 +87,7 @@
                           <span class="label label-success">Confirmed</span>
                           <?php } ?>
                         <a href="<?php echo site_url('transaksi/detail').'/'.$transaksi->id;?>" class="btn btn-xs btn-default">Detail</a>
-                        <a onclick="return confirm('Are you sure you want to delete this transaction?');" href="<?php echo site_url('transaksi/delete').'/'.$transaksi->id;?>" class="btn btn-xs btn-danger">Delete</a>
+                        <a onclick="return confirm('Are you sure you want to delete this transaction?');" href="<?php echo site_url('transaksi/delete_po').'/'.$transaksi->id;?>" class="btn btn-xs btn-danger">Delete</a>
                       </td>
                     </tr>
                     <?php } ?>

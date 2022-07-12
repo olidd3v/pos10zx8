@@ -79,7 +79,6 @@
                           <td>Nama Barang</td>
                           <td>Jumlah</td>
                           <td>Harga Beli Satuan</td>
-                          <td>Action</td>
                         </tr>
                       </thead>
                       <tbody>
@@ -93,7 +92,6 @@
                                 <input type="hidden" name="product_id[]" value="<?php echo !empty($cart['id']) ? $cart['id'] : '';?>"/>
                                 <td><input type="number" name="po_price[]" class="form-control" required="required"></td>
                                 <!-- <td>Rp<?php echo number_format($cart['price']);?></td> -->
-                                <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
                               </tr>
                             <?php }?>
                         <?php }?>

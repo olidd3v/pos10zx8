@@ -175,8 +175,7 @@ class Retur_purchase_model extends CI_Model {
 				'subtotal' => $cart['subtotal']
 			);
 			$this->insert_purchase_data($retur_data);
-
-			///$this->produk_model->update_qty_min($cart['id'],array('product_qty' => $cart['qty']));
+			$this->produk_model->update_qty_min($cart['id'],array('product_qty' => $cart['qty']));
 		}
 	}
 }
