@@ -81,6 +81,12 @@
                       </div>
                     </div>
                   <?php } ?>
+                  <div class="form-group">
+                      <label class="col-sm-4 control-label">Description</label>
+                      <div class="col-sm-8">
+                       <textarea name="desc_retur" id="desc_retur" class="form-control"><?php echo !empty($desc_retur) ? $desc_retur : '';?></textarea>
+                      </div>
+                    </div>
                 </div>
                 <div class="col-md-11 col-md-offset-1">
                   <h3 class="content-title">Informasi Barang yang ingin di Retur</h3>
@@ -98,13 +104,13 @@
                       <tbody>
                       <!-- <tbody id="transaksi-item"> -->
                         <?php if(!empty($carts) && is_array($carts)){?>
-                            <?php foreach($carts['data'] as $k => $cart){?>
+                            <?php $nox=1;$noz=1; foreach($carts['data'] as $k => $cart){?>
                               <tr>
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
                                 <input type="hidden" name="idx[]" value="<?php echo $cart['id'];?>">
                                 <!-- <td><input type="number" id="jml_qty" row-id="<?php echo $k;?>" class="retur_purchase_qty" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td> -->
-                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx();"/></td>
+                                <td><input type="number" id="jml_qty_<?php echo $nox++;?>" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx_<?php echo $noz++;?>();"/></td>
                                 <td>Rp<?php echo number_format($cart['price']);?></td>
                                 <input type="hidden" name="total_price[]" value="<?php echo $cart['price']; ?>">
                                 <td><span class="btn btn-danger btn-sm transaksi-delete-item" data-cart="<?php echo $k;?>">x</span></td>
@@ -141,24 +147,18 @@
   </div>
   <!-- /.content-wrapper -->
   <script>
-        function runx(){
-          var con = document.getElementById("jml_qty").value;
-          var btn = document.getElementById("submit-transaksi");
-
+    <?php $no=1; $nop=1; foreach($carts['data'] as $k => $cart){?>
+        function runx_<?php echo $no++; ?>(){
+          var con = document.getElementById("jml_qty_<?php echo $nop++;?>").value;
           if (con > <?php echo $cart['qty'];?> ) {
             alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
             location.reload();
-            btn.style.display = "none";
-          } else {
-            btn.style.display = "block";
           }
           if (con == 0 ) {
             alert('Jumlah Barang Input Tidak Boleh Kosong!');
             location.reload();
-            btn.style.display = "none";
-          } else {
-            btn.style.display = "block";
           }
         }
+        <?php } ?>
     </script>
 <?php $this->load->view('element/footer');?>

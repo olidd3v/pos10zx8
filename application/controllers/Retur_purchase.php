@@ -264,6 +264,7 @@ class Retur_purchase extends MY_Controller {
 		$return_is = $this->input->post('is_return');
 		$idr = $this->input->post('retur_id');
 		$retur_code = $this->input->post('retur_code');
+		$desc_retur = $this->input->post('desc_retur');
 		$idx = $this->input->post('idx');
 		$qty = $this->input->post('qty');
 		$total_price = $this->input->post('total_price');
@@ -287,7 +288,8 @@ class Retur_purchase extends MY_Controller {
 			'sales_retur_id' => $retur_code,
 			'total_price' => $sum_2,
 			'total_item' => $sum,
-			'is_return' => 0
+			'is_return' => 0,
+			'desc_retur' => $desc_retur
 		);
 		$this->db->insert("purchase_retur", $update_is);
 			for($x=0;$x<$d;$x++){
@@ -351,6 +353,7 @@ class Retur_purchase extends MY_Controller {
 		$data['edit'] = true;
 		$data['carts'] = $cart_data;
 		$data['code_penjualan'] = $details[0]->sales_retur_id;
+		$data['desc_retur'] = $details[0]->desc_retur;
 		$data['code_retur_penjualan'] = $details[0]->id;
 		$data['date'] = $details[0]->date;
 		$data['details'] = $details;
@@ -359,6 +362,7 @@ class Retur_purchase extends MY_Controller {
 
 	public function update($retur_id = 0){
 		$return_is = $this->input->post('is_return');
+		$desc_retur = $this->input->post('desc_retur');
 		$idx = $this->input->post('idx');
 		$qty = $this->input->post('qty');
 		$d = count($idx);
@@ -373,7 +377,8 @@ class Retur_purchase extends MY_Controller {
 		$update_is = array (
 			'id' => $retur_id,
 			'total_item' => $sum,
-			'is_return' => $return_is
+			'is_return' => $return_is,
+			'desc_retur' => $desc_retur
 		);
 		$this->db->where("id", $retur_id);
 		$this->db->update("purchase_retur", $update_is);

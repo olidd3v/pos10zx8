@@ -333,7 +333,8 @@ class Transaksi extends MY_Controller {
 			$data['id'] = escape($this->input->post('transaction_id'));
 			$data['supplier_id'] = escape($this->input->post('supplier_id'));
 			$data['total_price'] = $this->cart->total();
-			$data['total_item'] = $this->cart->total_items();
+			$data['total_item'] = count($carts);
+			// $data['total_item'] = $this->cart->total_items();
 
 			$this->transaksi_model->insert($data);
 			if($data['id']){
