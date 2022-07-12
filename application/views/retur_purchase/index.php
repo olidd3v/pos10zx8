@@ -72,6 +72,7 @@
                 <tbody>
                 <?php if(isset($penjualans) && is_array($penjualans)){ ?>
                   <?php foreach($penjualans as $penjualan){?>
+                    <?php echo json_encode($penjualans);?>
 						<tr>
 						  <td><?php echo $penjualan->id;?></td>
 						  <td>

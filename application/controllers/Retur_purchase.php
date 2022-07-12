@@ -280,7 +280,8 @@ class Retur_purchase extends MY_Controller {
 
 		}
 		$sum_2 = array_sum($total_price_f);
-		$sum = array_sum($val);
+		$sum = count($val);
+		// $sum = array_sum($val);
 		$update_is = array (
 			'id' => $idr,
 			'sales_retur_id' => $retur_code,
