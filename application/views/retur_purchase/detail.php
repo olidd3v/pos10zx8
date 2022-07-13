@@ -39,6 +39,7 @@
                                     <th>Total Item</th>
                                     <th>Total</th>
                                     <th>Return By</th>
+                                    <th>Reason</th>
                                     <th>Date</th>
                                 </tr>
                                 </thead>
@@ -50,6 +51,7 @@
                                         <td>Rp<?php echo number_format($details[0]->total_price);?></td>
                                         <td><?php echo "Barang";?></td>
                                         <!-- <td><?php echo $details[0]->return_by == 1 ? "Uang" : "Barang";?></td> -->
+                                        <td><?php echo $details[0]->desc_retur;?></td>
                                         <td><?php echo $details[0]->date;?></td>
                                     </tr>
                                 </tbody>

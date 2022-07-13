@@ -68,9 +68,9 @@
                     <td valign="top">: Barang</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <!-- <td valign="top">Jatuh Tempo</td> -->
-                    <!-- <td valign="top">: <?php echo $details[0]->is_cash == 1 ? "-" : $details[0]->pay_deadline_date;?></td> -->
+                    <td style="width:350px;"></td>
+                    <td valign="top">Reason</td>
+                    <td valign="top">: <?php echo $details[0]->desc_retur; ?></td>
                 </tr>
             </tbody>
         </table>
