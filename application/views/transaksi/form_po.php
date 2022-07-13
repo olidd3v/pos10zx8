@@ -83,11 +83,11 @@
                       </thead>
                       <tbody>
                         <?php if(!empty($carts) && is_array($carts)){?>
-                            <?php foreach($carts['data'] as $k => $cart){?>
+                            <?php $nox=1;$noz=1; foreach($carts['data'] as $k => $cart){?>
                               <tr>
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
-                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx();"/></td>
+                                <td><input type="number" id="jml_qty_<?php echo $nox++;?>" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx_<?php echo $noz++;?>();"/></td>
                                 <input type="hidden" name="id_pox[]" value="<?php echo !empty($code_penjualan) ? $code_penjualan : '';?>"/>
                                 <input type="hidden" name="product_id[]" value="<?php echo !empty($cart['id']) ? $cart['id'] : '';?>"/>
                                 <td><input type="number" name="po_price[]" class="form-control" required="required"></td>
@@ -124,12 +124,12 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <script>
+  <!-- <script>
         function runx(){
           var con = document.getElementById("jml_qty").value;
           var btn = document.getElementById("submit-transaksi");
 
-          if (con > <?php echo $details[0]->total_item;?> ) {
+          if (con > <?php #echo $details[0]->total_item;?> ) {
             alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
             location.reload();
             btn.style.display = "none";
@@ -144,5 +144,21 @@
             btn.style.display = "block";
           }
         }
+    </script> -->
+
+    <script>
+      <?php $no=1; $nop=1; foreach($carts['data'] as $k => $cart){?>
+        function runx_<?php echo $no++; ?>(){
+          var con = document.getElementById("jml_qty_<?php echo $nop++;?>").value;
+          if (con > <?php echo $cart['qty'];?> ) {
+            alert('Jumlah Barang Input Melebihi Total Item Pembelian!');
+            location.reload();
+          }
+          if (con == 0 ) {
+            alert('Jumlah Barang Input Tidak Boleh Kosong!');
+            location.reload();
+          }
+        }
+        <?php } ?>
     </script>
 <?php $this->load->view('element/footer');?>
