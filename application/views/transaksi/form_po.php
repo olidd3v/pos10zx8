@@ -87,7 +87,7 @@
                               <tr>
                                 <td><?php echo $cart['category_name'];?></td>
                                 <td><?php echo $cart['name'];?></td>
-                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $details[0]->total_item;?>" min="1" oninput="runx();"/></td>
+                                <td><input type="number" id="jml_qty" name="qty[]" value="<?php echo $cart['qty'];?>" max="<?php echo $cart['qty'];?>" min="1" oninput="runx();"/></td>
                                 <input type="hidden" name="id_pox[]" value="<?php echo !empty($code_penjualan) ? $code_penjualan : '';?>"/>
                                 <input type="hidden" name="product_id[]" value="<?php echo !empty($cart['id']) ? $cart['id'] : '';?>"/>
                                 <td><input type="number" name="po_price[]" class="form-control" required="required"></td>
