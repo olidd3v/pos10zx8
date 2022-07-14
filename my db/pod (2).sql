@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 08:07 AM
+-- Generation Time: Jul 13, 2022 at 12:55 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -62,8 +62,8 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `product_name`, `category_id`, `product_desc`, `product_qty`, `sale_price`, `date`) VALUES
 ('PDC001', 'tes kat', 'KAT001', 'tes kat', 18, 10000, '2022-07-10 03:01:57'),
-('PDC002', 'tes produk 2', 'KAT001', 'tes produk 2', 75, 1500, '2022-07-10 06:08:25'),
-('PDC003', 'tes 333', 'KAT001', 'tes 33', 10, 1003, '2022-07-11 23:15:20');
+('PDC002', 'tes produk 2', 'KAT001', 'tes produk 2', 73, 1500, '2022-07-10 06:08:25'),
+('PDC003', 'tes 333', 'KAT001', 'tes 33', 9, 1003, '2022-07-11 23:15:20');
 
 -- --------------------------------------------------------
 
@@ -82,6 +82,17 @@ CREATE TABLE `purchase_data` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `purchase_data`
+--
+
+INSERT INTO `purchase_data` (`id`, `transaction_id`, `product_id`, `category_id`, `quantity`, `price_item`, `subtotal`, `date`) VALUES
+(1, 'INP1657692694', 'PDC003', 'KAT001', '1', '1', '1', '2022-07-13 06:11:45'),
+(2, 'INP1657694461', 'PDC003', 'KAT001', '1', '2', '2', '2022-07-13 06:41:19'),
+(3, 'INP1657694461', 'PDC001', 'KAT001', '3', '12', '36', '2022-07-13 06:41:19'),
+(4, 'INP1657694483', 'PDC002', 'KAT001', '3', '2', '6', '2022-07-13 06:41:44'),
+(5, 'INP1657695371', 'PDC003', 'KAT001', '13', '0', '0', '2022-07-13 06:56:15');
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +109,14 @@ CREATE TABLE `purchase_retur` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `purchase_retur`
+--
+
+INSERT INTO `purchase_retur` (`id`, `sales_retur_id`, `total_price`, `total_item`, `is_return`, `desc_retur`, `date`) VALUES
+('RETP1657698534', 'INP1657694461', '14', '3', '1', 'tes', '2022-07-13 07:49:25'),
+('RETP1657698628', 'INP1657694461', '14', '2', '', 'sda', '2022-07-13 07:50:31');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +130,16 @@ CREATE TABLE `purchase_transaction` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `supplier_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `purchase_transaction`
+--
+
+INSERT INTO `purchase_transaction` (`id`, `total_price`, `total_item`, `date`, `supplier_id`) VALUES
+('INP1657692694', 1, 1, '2022-07-13 06:11:45', 'SUP001'),
+('INP1657694461', 38, 2, '2022-07-13 06:41:19', 'SUP001'),
+('INP1657694483', 6, 1, '2022-07-13 06:41:44', 'SUP001'),
+('INP1657695371', 0, 1, '2022-07-13 06:56:15', 'SUP001');
 
 -- --------------------------------------------------------
 
@@ -314,7 +343,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `purchase_data`
 --
 ALTER TABLE `purchase_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sales_data`
 --

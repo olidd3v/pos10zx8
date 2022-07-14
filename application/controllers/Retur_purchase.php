@@ -373,7 +373,8 @@ class Retur_purchase extends MY_Controller {
 			);
 			$val[$e] = $data_qty_retur['qty'];
 		}
-		$sum = array_sum($val);
+		// $sum = array_sum($val);
+		$sum = count($val);
 		$update_is = array (
 			'id' => $retur_id,
 			'total_item' => $sum,
